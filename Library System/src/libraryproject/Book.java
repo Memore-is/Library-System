@@ -2,17 +2,13 @@ package libraryproject;
 
 	public class Book { 
 	
-		private String title; 
-		private String author;
-		private String genre;
-		private int readingLevel;
+		private String title, author, genre; 
 		private boolean isAvailable; 
 
-	public Book(String title, String author, String genre, int readingLevel) { 
+	public Book(String title, String author, String genre) { 
 			this.title = title;
 			this. author = author;
 			this. genre = genre;
-			this.readingLevel = readingLevel;
 			isAvailable = true;
 }
 		public String getTitle() {
@@ -21,9 +17,6 @@ package libraryproject;
 		public String getGenre() {
 			return genre;
 }
-		public int getReadingLevel() {
-			return readingLevel;
-}
 		public boolean isAvailable() {
 			return isAvailable;
 }
@@ -31,7 +24,6 @@ package libraryproject;
 			isAvailable = status;
 }
 		public String tostring() {
-			return title + " by " + author + " (" + genre +", Level " + readingLevel + 
-						(isAvailable ? "Available" : "Chcked Out");
-} 
+			return title + " by " + author + " (" + genre +", Level " + (isAvailable ? "Available" : "Chcked Out");
+		} 
 }    
