@@ -18,9 +18,9 @@ public ArrayList<Book> getReadingHistory() {
     return readingHistory;
 }
 public void borrowBook(Book book) { 
-    if (book. isAvailable()) {
-        readingHistory. add(book);
-        book.setAvailable(false);
+    if (book.checkAvailable()) {
+        readingHistory.add(book);
+        // book.setAvailable(false);
     }
 }
 }    

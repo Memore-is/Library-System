@@ -1,23 +1,127 @@
 package libraryproject;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Library {
     public static void main(String[] args) {
-        ArrayList<Book> books = new ArrayList<Book> ();
+        Scanner input = new Scanner(System.in);
+        ArrayList<Book> books = new ArrayList<Book> ();  // store type of data in arraylist (Book objects)
 
-        books.add(new Book("1984", "George Orwell", "Dystopian Fiction"));
+        System.out.print("Enter the number of books to add to the library: ");
+        int numBooks = input.nextInt();
+        input.nextLine();  // consume the newline character
+
+        for (int i = 0; i < numBooks; i++) {
+            System.out.print("Enter the title of book " + (i + 1) + ": ");
+            String title = input.nextLine();
+
+            System.out.print("Enter the author of book " + (i + 1) + ": ");
+            String author = input.nextLine();
+
+            System.out.print("Enter the genre of book " + (i + 1) + ": ");
+            String genre = input.nextLine();
+
+            System.out.print("Enter the quantity of book " + (i + 1) + ": ");
+            int copies = input.nextInt();
+  
+            books.add(new Book(title, author, genre, copies)); 
+        }
+
+// add 5 copies each book as base parameter in Book constructor and then add method to check out book (decrease quantity by 1 and set availability to false if quantity is 0) and return book (increase quantity by 1 and set availability to true)
+
+        books.add(new Book("1984", "George Orwell", "Classics", 5));
+        books.add(new Book("Animal Farm", "George Orwell", "Classics", 5));
+        books.add(new Book("Crime and Punishment", "Fyodor Dostoevsky", "Classics", 5));
+        books.add(new Book("Pride and Prejudice", "Jane Austen", "Classics", 5));
+        books.add(new Book("The Great Gatsby", "F. Scott Fitzgerald", "Classics", 5));
+        books.add(new Book("To Kill a Mockingbird", "Harper Lee", "Classics", 5));
+        books.add(new Book("The Brothers Karamazov", "Fyodor Dostoevsky", "Classics", 5));
+        books.add(new Book("Anna Karenina", "Leo Tolstoy", "Classics", 5));
+        books.add(new Book("The Catcher in the Rye", "J.D. Salinger", "Classics", 5));
+        books.add(new Book("Frankenstein", "Mary Shelley", "Classics", 5));
+        books.add(new Book("The Odyssey", "Homer", "Classics", 5));
+        books.add(new Book("The Iliad", "Homer", "Classics", 5));
+        books.add(new Book("Les Misérables", "Victor Hugo", "Classics", 5));
+        books.add(new Book("The Count of Monte Cristo", "Alexandre Dumas", "Classics", 5));
+        books.add(new Book("Slaughterhouse-Five", "Kurt Vonnegut", "Classics", 5));
+        books.add(new Book("The Grapes of Wrath", "John Steinbeck", "Classics", 5));
+
+        books.add(new Book("The Lord of the Rings", "J.R.R. Tolkien", "Fantasy", 5));
+        books.add(new Book("Harry Potter and the Sorcerer's Stone", "J.K. Rowling", "Fantasy", 5));
+        books.add(new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 5));
+        books.add(new Book("A Game of Thrones", "George R.R. Martin", "Fantasy", 5));
+        books.add(new Book("The Name of the Wind", "Patrick Rothfuss", "Fantasy", 5));
+        books.add(new Book("The Lies of Locke Lamora", "Scott Lynch", "Fantasy", 5));
+        books.add(new Book("The Way of Kings", "Brandon Sanderson", "Fantasy", 5));
+        books.add(new Book("The Wheel of Time", "Robert Jordan", "Fantasy", 5));
+
+        books.add(new Book("The Martian", "Andy Weir", "Science Fiction", 5));
+        books.add(new Book("Dune", "Frank Herbert", "Science Fiction", 5));
+        books.add(new Book("Ender's Game", "Orson Scott Card", "Science Fiction", 5));
+        books.add(new Book("Foundation", "Isaac Asimov", "Science Fiction", 5));
+        books.add(new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "Science Fiction", 5    ));
+
+        books.add(new Book("The Da Vinci Code", "Dan Brown", "Mystery", 5));
+        books.add(new Book("The Girl with the Dragon Tattoo", "Stieg Larsson", "Mystery", 5));
+        books.add(new Book("The Hound of the Baskesrville", "Arthur Conan Doyle", "Mystery", 5));
+        books.add(new Book("A Study in Scarlet", "Arthur Conan Doyle", "Mystery", 5));
+        books.add(new Book("The Sign of the Four", "Arthur Conan Doyle", "Mystery", 5));
+        books.add(new Book("The Valley of Fear", "Arthur Conan Doyle", "Mystery", 5));
+        books.add(new Book("Murder on the Orient Express", "Agatha Christie", "Mystery", 5));
+        books.add(new Book("And Then There Were None", "Agatha Christie", "Mystery", 5));
+        books.add(new Book("The Moving Finger", "Agatha Christie", "Mystery", 5));
+        books.add(new Book("Crooked House", "Agatha Christie", "Mystery", 5));
+        books.add(new Book("Nemesis", "Agatha Christie", "Mystery", 5));
+        books.add(new Book("Partners in Crime", "Agatha Christie", "Mystery", 5));
+        books.add(new Book("A Caribbean Mystery", "Agatha Christie", "Mystery", 5));
+        books.add(new Book("The Murder at the Vicarage", "Agatha Christie", "Mystery", 5));
+        books.add(new Book("The Man in the Brown Suit", "Agatha Christie", "Mystery", 5));
+        books.add(new Book("The Case of the Missing Will", "Agatha Christie", "Mystery", 5));
+        books.add(new Book("The Purloined Letter", "Edgar Allan Poe", "Mystery", 5));
+        books.add(new Book("The Domain of Arachne", "Edgar Allan Poe", "Mystery", 5));
+        books.add(new Book("The Murders in the Rue Morgue", "Edgar Allan Poe", "Mystery", 5));
+        books.add(new Book("The Maltese Falcon", "Dashiell Hammett", "Mystery", 5));
+        books.add(new Book("Gone Girl", "Gillian Flynn", "Mystery", 5));
+        books.add(new Book("The Silence of the Lambs", "Thomas Harris", "Mystery", 5));
+        books.add(new Book("The Balloon Hoax", "Edgar Allan Poe", "Mystery", 5));
+        books.add(new Book("The Fall of the House of Usher", "Edgar Allan Poe", "Mystery", 5));
+        books.add(new Book("The Tell-Tale Heart", "Edgar Allan Poe", "Mystery", 5));
+        books.add(new Book("The Cask of Amontillado", "Edgar Allan Poe", "Mystery", 5));
+
+
+        
+        // System.out.println(books.get(0).getTitle());  // gets title of first book
+        // System.out.println(books.get(0).getGenre());  // gets genre of first book
+        // System.out.println(books.get(0).tostring());  // gets title, author, genre, and availability of first book
+        // System.out.println(books.get(0).isAvailable());  // gets availability of first book
+        // books.get(0).setAvailable(false);  // sets availability of first book to false (checked out)
+        System.out.println(books.size());  // gets size of library (number of books)
+        // books.clear();  // removes all objects from list
         // books.remove(0);
-        books.add(new Book("Animal Farm", "George Orwell", "Political Satire"));
-
         // books.set(0, 45);  // only if there is an existing object at specified index (replacing)
+        // System.out.println(books); // gets id num (for objects)
+        // System.out.println(books.get(1));  // same 
 
-        books.add(new Book("Crime and Punishment", "Fyodor Dostoevsky", "Fiction"));
-        books.add(new Book("Pride and Prejudice", "Jane Austen", "Classic"));
-
-        System.out.println(books);                // gets id num (for objects)
-        System.out.println(books.get(1));  // same 
-
+        // need to override tostring method in Book class to get readable output when printing book objects
+         for (Book book : books) {
+            System.out.println(book.toString());
+        }  
         //sort by author names in slphabetical order
+        Collections.sort(books, new Comparator<Book>() {
+            @Override    
+                public int compare(Book b1, Book b2) {
+            return b1.getAuthor().compareTo(b2.getAuthor());
+                }
+            });
+
+        // need to add a method to sort by genre and then by author name within each genre (or just sort by genre and then print each genre separately)
+
+        // for (Book book : books) {
+        //     System.out.println(book.getAuthor());
+        
+        input.close();
     }
 }
