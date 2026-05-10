@@ -44,6 +44,7 @@ public class Adjust {
             System.out.print("Enter the author of book " + (i + 1) + ": ");
             String author = input.nextLine();
 
+            // fix for multiple genres
             System.out.print("Enter the genre of book " + (i + 1) + ": ");
             String genre = input.nextLine();
 

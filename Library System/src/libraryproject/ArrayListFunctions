@@ -25,6 +25,6 @@
 
         // need to add a method to sort by genre and then by author name within each genre (or just sort by genre and then print each genre separately)
 
-        // for (Book book : books) {
+        // for (Book book : books) {            enhanceed for loop
         //     System.out.println(book.getAuthor());
         
