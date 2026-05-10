@@ -21,7 +21,7 @@ public class Adjust {
             else if (function == 2) {
                 System.out.println("Remove Books");
                 removeBooks(null);
-            } 
+            }
             else {
                 System.out.println("Going back to main menu...");
                 break;
