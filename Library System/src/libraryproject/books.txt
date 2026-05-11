@@ -14,7 +14,6 @@ Les Misérables|Victor Hugo|Classics|5
 The Count of Monte Cristo|Alexandre Dumas|Classics|5
 Slaughterhouse-Five|Kurt Vonnegut|Classics|5
 The Grapes of Wrath|John Steinbeck|Classics|5
-
 The Lord of the Rings|J.R.R. Tolkein|Fantasy|5
 Harry Potter and the Sorcerer's Stone|J.K. Rowling|Fantasy|5
 The Hobbit|J.R.R. Tolkein|Fantasy|5
@@ -23,13 +22,11 @@ The Name of the Wind|Patrick Rothfuss|Fantasy|5
 The Lies of Locke Lamora|Scott Lynch|Fantasy|5
 The Way of Kings|Brandon Sanderson|Fantasy|5
 The Wheel of Time|Robert Jordan|Fantasy|5
-
 The Martian|Andy Weir|Science Fiction|5
 Dune|Frank Herbert|Science Fiction|5
 Ender's Game|Orson Scott Card|Science Fiction|5
 Foundation|Isaac Asimov|Science Fiction|5
 The Hitchhiker's Guide to the Galaxy|Douglas Adams|Science Fiction|5
-
 The Da Vinci Code|Dan Brown|Mystery|5
 The Girl with the Dragon Tattoo|Stieg Larsson|Mystery|5
 The Hound of the Baskesrville|Arthur Conan Doyle|Mystery|5
@@ -58,14 +55,13 @@ The Balloon Hoax|Edgar Allan Poe|Mystery|5
 The Fall of the House of Usher|Edgar Allan Poe|Mystery|5
 The Tell-Tale Heart|Edgar Allan Poe|Mystery|5
 The Cask of Amontillado|Edgar Allan Poe|Mystery|5
-
 The Shining|Stephen King|Horror|5
 Dracula|Bram Stoker|Horror|5
 The Exorcist|William Peter Blatty|Horror|5
-It|Stephen King|Horror|5 
+It|Stephen King|Horror|5
 The Haunting of Hill House|Shirley Jackson|Horror|5
 The Silence of the Lambs|Thomas Harris|Horror|5
-The Amityville Horror|Jay Anson|Horror|5 
+The Amityville Horror|Jay Anson|Horror|5
 The Turn of the Screw|Henry James|Horror|5
 The Call of Cthulhu|H.P. Lovecraft|Horror|5
 The Shadow over Innsmouth|H.P. Lovecraft|Horror|5
@@ -73,23 +69,22 @@ The Dunwich Horror|H.P. Lovecraft|Horror|5
 The Colour Out of Space|H.P. Lovecraft|Horror|5
 The Whisperer in Darkness|H.P. Lovecraft|Horror|5
 The Shadow Out of Time|H.P. Lovecraft|Horror|5
-The Dreams in the Witch House|H.P. Lovecraft|Horror|5  
+The Dreams in the Witch House|H.P. Lovecraft|Horror|5
 The Horror at Red Hook|H.P. Lovecraft|Horror|5
 The Rats in the Walls|H.P. Lovecraft|Horror|5
 The Outsider|Stephen King|Horror|5
 The Green Mile|Stephen King|Horror|5
 Pet Sematary|Stephen King|Horror|5
 Carrie|Stephen King|Horror|5
-Misery|Stephen King|Horror|5 
+Misery|Stephen King|Horror|5
 The Stand|Stephen King|Horror|5
 The Dark Tower|Stephen King|Horror|5
 The Institute|Stephen King|Horror|5
-
 The Art of War|Sun Tzu|Non-Fiction|5
 Sapiens: A Brief History of Humankind|Yuval Noah Harari|Non-Fiction|5
 Educated|Tara Westover|Non-Fiction|5
 The Immortal Life of Henrietta Lacks|Rebecca Skloot|Non-Fiction|5
-The Wright Brothers|David McCullough|Non-Fiction|5 
+The Wright Brothers|David McCullough|Non-Fiction|5
 The Diary of a Young Girl|Anne Frank|Non-Fiction|5
 The Glass Castle|Jeannette Walls|Non-Fiction|5
 The Power of Habit|Charles Duhigg|Non-Fiction|5
@@ -98,16 +93,15 @@ Thinking, Fast and Slow|Daniel Kahneman|Non-Fiction|5
 The 7 Habits of Highly Effective People|Stephen R. Covey|Non-Fiction|5
 How to Win Friends and Influence People|Dale Carnegie|Non-Fiction|5
 The Power of Now|Eckhart Tolle|Non-Fiction|5
-Man's Search for Meaning|Viktor E. Frankl|Non-Fiction|5 
-
+Man's Search for Meaning|Viktor E. Frankl|Non-Fiction|5
 Meno|Plato|Philosophy|5
 The Republic|Plato|Philosophy|5
 Nicomachean Ethics|Aristotle|Philosophy|5
 Meditations|Marcus Aurelius|Philosophy|5
 The Prince|Niccolò Machiavelli|Philosophy|5
 Beyond Good and Evil|Friedrich Nietzsche|Philosophy|5
-The Art of Happiness|Dalai Lama|Philosophy|5 
-The Tao of Pooh|Benjamin Hoff|Philosophy|5      
+The Art of Happiness|Dalai Lama|Philosophy|5
+The Tao of Pooh|Benjamin Hoff|Philosophy|5
 The Book of Five Rings|Miyamoto Musashi|Philosophy|5
 The Analects|Confucius|Philosophy|5
 The Symposium|Plato|Philosophy|5
@@ -115,24 +109,25 @@ The Stranger|Albert Camus|Philosophy|5
 The Myth of Sisyphus|Albert Camus|Philosophy|5
 The Ethics|Baruch Spinoza|Philosophy|5
 The Social Contract|Jean-Jacques Rousseau|Philosophy|5
-The Leviathan|Thomas Hobbes|Philosophy|5  
+The Leviathan|Thomas Hobbes|Philosophy|5
 The Critique of Pure Reason|Immanuel Kant|Philosophy|5
 The Critique of Practical Reason|Immanuel Kant|Philosophy|5
 The Critique of Judgment|Immanuel Kant|Philosophy|5
 The Phenomenology of Spirit|Georg Wilhelm Friedrich Hegel|Philosophy|5
-The Being and Nothingness|Jean-Paul Sartre|Philosophy|5 
+The Being and Nothingness|Jean-Paul Sartre|Philosophy|5
 Physics|Aristotle|Philosophy|5
 Metaphysics|Aristotle|Philosophy|5
-On the Origin of Species|Charles Darwin|Philosophy|5  
-The Structure of Scientific Revolutions|Thomas S. Kuhn|Philosophy|5 
-The Selfish Gene|Richard Dawkins|Philosophy|5 
-The Demon-Haunted World: Science as a Candle in the Dark|Carl Sagan|Philosophy|5  
+On the Origin of Species|Charles Darwin|Philosophy|5
+The Structure of Scientific Revolutions|Thomas S. Kuhn|Philosophy|5
+The Selfish Gene|Richard Dawkins|Philosophy|5
+The Demon-Haunted World: Science as a Candle in the Dark|Carl Sagan|Philosophy|5
 Cosmos|Carl Sagan|Philosophy|5
 The Varieties of Religious Experience|William James|Philosophy|5
 The Will to Power|Friedrich Nietzsche|Philosophy|5
-The Birth of Tragedy|Friedrich Nietzsche|Philosophy|5 
-The Genealogy of Morals|Friedrich Nietzsche|Philosophy|5  
+The Birth of Tragedy|Friedrich Nietzsche|Philosophy|5
+The Genealogy of Morals|Friedrich Nietzsche|Philosophy|5
 The Sceptical Essays|Friedrich Nietzsche|Philosophy|5
 The death of Ivan Ilyich|Leo Tolstoy|Philosophy|5
 The Plague|Albert Camus|Philosophy|5
 The Rebel|Albert Camus|Philosophy|5
+Bowling Alone|Robert Putnam|Non-Fiction|3
