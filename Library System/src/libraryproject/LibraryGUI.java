@@ -1,177 +1,102 @@
 package libraryproject;
 
-// Swing imports: javax.swing.* = GUI components (buttons, dialogs, text areas)
+// for GUI
 import javax.swing.*;
-// AWT imports: java.awt.* = layout managers and basic GUI utilities
 import java.awt.*;
+
+// for file stuff
 import java.io.File;
+
+// for basic stuff
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * LibraryGUI - A Java Swing application for managing a library
- * This class creates a graphical user interface with buttons to browse, borrow, 
- * return, and add books. All data is loaded from and saved to books.txt
- */
+
 public class LibraryGUI {
-
-    // JFrame = the main window that holds all UI components
-    JFrame frame;
-
-    // JTextArea = a large text display area (read-only in this case)
-    // Shows the list of books when user clicks "Browse"
-    JTextArea bookArea;
-
-    // JButton = clickable buttons for different actions
-    JButton browseButton;      // Displays all available books
-    JButton borrowButton;      // Reduces book copies by 1
-    JButton returnButton;      // Increases book copies by 1
-    JButton addButton;         // Opens a form to add a new book
-
-    // ArrayList = dynamic list that stores all Book objects loaded from books.txt
     ArrayList<Book> books = new ArrayList<Book>();
 
-    /**
-     * Constructor: Runs when you do new LibraryGUI()
-     * Sets up the entire window and all interactive elements
-     */
     public LibraryGUI() {
-
-        // Load all books from books.txt into the books ArrayList
         loadBooks();
 
-        // Create the main window with title "Library System"
-        frame = new JFrame("Library System");
+        JFrame frame = new JFrame("Library System");   // main window + title
+        
+        JButton browse = new JButton("Browse Books");    
+        JButton borrow = new JButton("Borrow Book");
+        JButton returnB = new JButton("Return Book");
+        JButton add = new JButton("Add Book"); 
 
-        // Create the four action buttons
-        browseButton = new JButton("Browse Books");
-        borrowButton = new JButton("Borrow Book");
-        returnButton = new JButton("Return Book");
-        addButton = new JButton("Add Book");
+        JTextArea Allbooks = new JTextArea(20, 40);         // rows show how many objects to display at once, columns for width
+        Allbooks.setEditable(false);        // uneditable books
+        frame.setLayout(new FlowLayout());      // to arrange in row
 
-        // Create a text area with 15 rows and 35 columns
-        bookArea = new JTextArea(15, 35);
-        // Don't allow the user to type in this area (read-only)
-        bookArea.setEditable(false);
+        frame.add(browse);
+        frame.add(borrow);
+        frame.add(returnB);
+        frame.add(add);
 
-        // FlowLayout = arranges components left-to-right, top-to-bottom
-        // (simpler than GridBagLayout, good for small GUIs)
-        frame.setLayout(new FlowLayout());
+        frame.add(new JScrollPane(Allbooks));
 
-        // Add the buttons to the window in order
-        frame.add(browseButton);
-        frame.add(borrowButton);
-        frame.add(returnButton);
-        frame.add(addButton);
-
-        // Add the text area wrapped in a JScrollPane
-        // (JScrollPane = adds scroll bars if text overflows)
-        frame.add(new JScrollPane(bookArea));
-
-        // ===== BROWSE BUTTON =====
-        // addActionListener = "when user clicks this button, run this code"
-        // e -> { } = lambda expression (shorthand for anonymous function)
-        browseButton.addActionListener(e -> {
-
-            // Build a string with all books
+        browse.addActionListener(e -> {
             String text = "";
 
-            // Loop through each Book object in the books list
             for (Book b : books) {
-                // Call the book's toString() method to get formatted text like:
-                // "1984 by George Orwell (Classics, Available)"
                 text += b.toString() + "\n";
             }
 
-            // Display the text in the text area
-            bookArea.setText(text);
+            Allbooks.setText(text);
         });
 
-        // ===== BORROW BUTTON =====
-        // When clicked, ask user which book they want to borrow
-        borrowButton.addActionListener(e -> {
-
-            // Pop up a dialog box that lets user type in a book title
+        borrow.addActionListener(e -> {
             String title = JOptionPane.showInputDialog(frame, "Enter book title:");
-
-            // Loop through all books to find a match
             for (Book b : books) {
 
-                // Check if this book's title matches (case-insensitive)
                 if (b.getTitle().equalsIgnoreCase(title)) {
-
-                    // Is the book available (more than 0 copies)?
                     if (b.checkAvailable()) {
-                        // Reduce the copy count by 1
                         b.setCopies(b.getCopies() - 1);
 
-                        // Show success message
-                        JOptionPane.showMessageDialog(frame,
-                                "You borrowed " + b.getTitle());
-                        // Update the display to show new copy count
+                        JOptionPane.showMessageDialog(frame, "You borrowed " + b.getTitle());
                         refreshBookArea();
-                    } else {
-                        // No copies available
-                        JOptionPane.showMessageDialog(frame,
-                                "Book unavailable.");
+                    } 
+                    else {
+                        JOptionPane.showMessageDialog(frame, "Book unavailable.");
                     }
-
-                    // Exit the loop (we found the book)
                     return;
                 }
             }
 
-            // If we get here, the book was not found
-            JOptionPane.showMessageDialog(frame,
-                    "Book not found.");
+            JOptionPane.showMessageDialog(frame, "Book not found.");
         });
 
-        // ===== RETURN BUTTON =====
-        // Similar to borrow, but adds a copy back instead of removing one
-        returnButton.addActionListener(e -> {
-
+        returnB.addActionListener(e -> {
             String title = JOptionPane.showInputDialog(frame, "Enter book title:");
 
             for (Book b : books) {
-
                 if (b.getTitle().equalsIgnoreCase(title)) {
 
-                    // Increase the copy count by 1
                     b.setCopies(b.getCopies() + 1);
 
-                    JOptionPane.showMessageDialog(frame,
-                            "Book returned.");
-                    // Update the display to show new copy count
+                    JOptionPane.showMessageDialog(frame, "Book returned.");
                     refreshBookArea();
 
                     return;
                 }
             }
-
-            JOptionPane.showMessageDialog(frame,
-                    "Book not found.");
+            JOptionPane.showMessageDialog(frame, "Book not found.");
         });
 
-        // ===== ADD BOOK BUTTON =====
-        // When clicked, open a special dialog form (not just a simple input box)
-        addButton.addActionListener(e -> showAddBookDialog());
 
-        // Set the window size to 500 pixels wide by 400 pixels tall
-        frame.setSize(500, 400);
-        // Center the window on the screen
-        frame.setLocationRelativeTo(null);
+        add.addActionListener(e -> showAddBookDialog());
 
-        // When user clicks the X button, close the program
+        frame.setSize(500, 400);        // in pixels for sm reason
+        frame.setLocationRelativeTo(null);          // center?
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Make the window visible (must be last line in constructor)
-        frame.setVisible(true);
+        frame.setVisible(true);     // make visible
     }
 
-    /**
-     * showAddBookDialog() - Creates a custom dialog form for adding books
-     * Instead of 4 separate pop-ups, this shows one form with 4 input fields
-     */
+
+
     private void showAddBookDialog() {
         // JDialog = a window that "blocks" the main window (you must close it first)
         // "Add Book" = dialog title
@@ -337,17 +262,5 @@ public class LibraryGUI {
             // If anything goes wrong, print the error (helps with debugging)
             e.printStackTrace();
         }
-    }
-
-    /**
-     * main() - Entry point of the program
-     * This method is called when user runs: java -jar LibrarySystem.jar
-     */
-    public static void main(String[] args) {
-        // SwingUtilities.invokeLater() = "run this code on the Swing event thread"
-        // This is required for thread safety in Swing applications
-        // Without it, the GUI might have weird glitches on some systems
-        // The lambda () -> new LibraryGUI() means: "create the GUI"
-        javax.swing.SwingUtilities.invokeLater(() -> new LibraryGUI());
     }
 }

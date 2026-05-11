@@ -13,7 +13,7 @@ public class Adjust {
             System.out.println("Options: \n1. Add Books \n2. Remove Books \n3. Go Back");
             System.out.print("Please enter function number (1-3): ");
             int function = input.nextInt();
-            input.nextLine(); // consume newline
+            input.nextLine(); 
 
             if (function < 1 || function > 3) {
                 System.out.println("Invalid choice. Please enter a number between 1 and 3.");
@@ -31,27 +31,26 @@ public class Adjust {
                 break;
             }
         }
-        // Instead of UI.main(null), just return
     }
 
     private void addBooks() {
-        System.out.print("Enter the number of books to add: ");
-        int numBooks = input.nextInt();
-        input.nextLine(); // consume newline
+        System.out.print("Enter total number of [unique] books: ");
+        int addnum = input.nextInt();
+        input.nextLine();
 
-        for (int i = 0; i < numBooks; i++) {
-            System.out.print("Enter the title of book " + (i + 1) + ": ");
+        for (int i = 0; i < addnum; i++) {
+            System.out.print("Enter title of book " + (i + 1) + ": ");
             String title = input.nextLine().trim();
 
-            System.out.print("Enter the author of book " + (i + 1) + ": ");
+            System.out.print("Enter author name of book " + (i + 1) + ": ");
             String author = input.nextLine().trim();
 
-            System.out.print("Enter the genre of book " + (i + 1) + ": ");
+            System.out.print("Enter genre of book " + (i + 1) + ": ");
             String genre = input.nextLine().trim();
 
-            System.out.print("Enter the quantity of book " + (i + 1) + ": ");
+            System.out.print("Enter quantity of book " + (i + 1) + ": ");
             int copies = input.nextInt();
-            input.nextLine(); // consume newline
+            input.nextLine(); 
 
             books.add(new Book(title, author, genre, copies));
             System.out.println("Book added.");
@@ -60,7 +59,7 @@ public class Adjust {
     }
 
     private void removeBooks() {
-        System.out.print("Enter the title of the book to remove: ");
+        System.out.print("Enter title: ");
         String title = input.nextLine().trim();
 
         for (Book book : books) {
@@ -75,7 +74,6 @@ public class Adjust {
     }
 
     private void loadBooks() {
-        // Similar to others
         java.io.File file = new java.io.File("books.txt");
         if (!file.exists()) {
             file = new java.io.File("Library System/src/libraryproject/books.txt");
