@@ -19,7 +19,6 @@ public class Student {
     public void borrowBook(Book book) { 
         if (book.checkAvailable()) {
             readingHistory.add(book);
-            // book.setAvailable(false);
         }
     }
 }

@@ -8,12 +8,11 @@ public class Edit {
     private Scanner input = new Scanner(System.in);
     
     public Edit() {
-        // For now, no loading students, start empty
         while (true) {
             System.out.println("Options: \n1. Add Student \n2. Remove Student \n3. Go Back");
             System.out.print("Please enter function number (1-3): ");
             int function = input.nextInt();
-            input.nextLine(); // consume newline
+            input.nextLine();
 
             if (function < 1 || function > 3) {
                 System.out.println("Invalid choice. Please enter a number between 1 and 3.");
