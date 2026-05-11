@@ -13,9 +13,7 @@ Not so disappointed in my cs class teaching Java anymore.
 Download the LibrarySystem.jar file from the release. Needs at least Java 8 already downloaded to work.
 Please don't try fullscreen.
 
-Below is a demo video-
-
-[text](README.md)
+Demo video: Library-System_demo.mov
 
 
 ** AI-Use
