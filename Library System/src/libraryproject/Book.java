@@ -32,7 +32,15 @@ package libraryproject;
 			}
 		}
 
+		public int getCopies() {
+			return copies;
+		}
+
+		public void setCopies(int copies) {
+			this.copies = copies;
+		}
+
 		public String toString() {
-			return title + " by " + author + " (" + genre +", Level " + (copies > 0 ? "Available" : "Checked Out");
-		} 
+			return title + " by " + author + " (" + genre + ", " + (copies > 0 ? "Available" : "Checked Out") + ")";
+		}
 }    

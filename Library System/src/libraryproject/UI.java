@@ -1,6 +1,5 @@
 package libraryproject;
 
-import java.io.*;
 import java.util.*;
 
 public class UI {
@@ -42,10 +41,6 @@ public class UI {
                 break;
             }
         }
-
-        System.out.print("Please enter your ID: ");
-        int ID = input.nextInt();
-
         input.close();
     }
 }

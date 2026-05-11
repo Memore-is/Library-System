@@ -1,71 +1,117 @@
 package libraryproject;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Adjust {
-    Scanner input = new Scanner(System.in);
+    private ArrayList<Book> books = new ArrayList<>();
+    private Scanner input = new Scanner(System.in);
     
     public Adjust() {
+        loadBooks();
         while (true) {
             System.out.println("Options: \n1. Add Books \n2. Remove Books \n3. Go Back");
             System.out.print("Please enter function number (1-3): ");
             int function = input.nextInt();
+            input.nextLine(); // consume newline
 
             if (function < 1 || function > 3) {
                 System.out.println("Invalid choice. Please enter a number between 1 and 3.");
             } 
             else if (function == 1) {
                 System.out.println("Add Books");
-                addBooks(null);
+                addBooks();
             } 
             else if (function == 2) {
                 System.out.println("Remove Books");
-                removeBooks(null);
+                removeBooks();
             }
             else {
                 System.out.println("Going back to main menu...");
                 break;
             }
         }
-
-        UI.main(null); // Call the main method of UI to return to the main menu
+        // Instead of UI.main(null), just return
     }
 
-    // methods for adding and removing books from the library
-
-    public void addBooks(Library library) {
-        System.out.print("Enter the number of books to add to the library: ");
+    private void addBooks() {
+        System.out.print("Enter the number of books to add: ");
         int numBooks = input.nextInt();
+        input.nextLine(); // consume newline
 
         for (int i = 0; i < numBooks; i++) {
             System.out.print("Enter the title of book " + (i + 1) + ": ");
-            String title = input.nextLine();
+            String title = input.nextLine().trim();
 
             System.out.print("Enter the author of book " + (i + 1) + ": ");
-            String author = input.nextLine();
+            String author = input.nextLine().trim();
 
-            // fix for multiple genres
             System.out.print("Enter the genre of book " + (i + 1) + ": ");
-            String genre = input.nextLine();
+            String genre = input.nextLine().trim();
 
             System.out.print("Enter the quantity of book " + (i + 1) + ": ");
             int copies = input.nextInt();
-  
-            library.books.add(new Book(title, author, genre, copies));
+            input.nextLine(); // consume newline
+
+            books.add(new Book(title, author, genre, copies));
+            System.out.println("Book added.");
         }
+        saveBooks();
     }
 
-    public void removeBooks(Library library) {
+    private void removeBooks() {
         System.out.print("Enter the title of the book to remove: ");
-        String title = input.nextLine();
+        String title = input.nextLine().trim();
 
-        for (Book book : library.books) {
+        for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(title)) {
-                library.books.remove(book);
+                books.remove(book);
                 System.out.println("Book removed successfully.");
+                saveBooks();
                 return;
             }
         }
-        System.out.println("Book not found in the library.");
+        System.out.println("Book not found.");
+    }
+
+    private void loadBooks() {
+        // Similar to others
+        java.io.File file = new java.io.File("books.txt");
+        if (!file.exists()) {
+            file = new java.io.File("Library System/src/libraryproject/books.txt");
+        }
+        if (!file.exists()) {
+            System.err.println("Could not find books.txt.");
+            return;
+        }
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine().trim();
+                if (line.isEmpty() || line.startsWith("//")) continue;
+                String[] parts = line.split("\\|");
+                if (parts.length < 4) continue;
+                String title = parts[0].trim();
+                String author = parts[1].trim();
+                String genre = parts[2].trim();
+                int copies = Integer.parseInt(parts[3].trim());
+                books.add(new Book(title, author, genre, copies));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveBooks() {
+        java.io.File file = new java.io.File("books.txt");
+        if (!file.exists()) {
+            file = new java.io.File("Library System/src/libraryproject/books.txt");
+        }
+        try (java.io.PrintWriter writer = new java.io.PrintWriter(file)) {
+            for (Book book : books) {
+                writer.println(book.getTitle() + "|" + book.getAuthor() + "|" + book.getGenre() + "|" + book.getCopies());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
