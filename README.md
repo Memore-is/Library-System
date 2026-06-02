@@ -10,7 +10,7 @@ Not so disappointed in my cs class teaching Java anymore.
 10/10 recommended, will continue.
 
 
-Download the LibrarySystem.jar file from the release. Needs at least Java 8 already downloaded to work.
+Download the LibrarySystem.jar and books.txt file from the release. Needs at least Java 8 already downloaded to work.
 Please don't try fullscreen.
 
 Demo video: Library-System_demo.mov
