@@ -1,7 +1,10 @@
 package libraryproject;
 
+// loads books from txt file to program
+
 import java.io.File;
 import java.io.PrintWriter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +17,7 @@ public class Manager {
 
     public void loadBooks() {
         File file = new File("books.txt");
+        
         if (!file.exists()) {
             file = new File("Library System/src/libraryproject/books.txt");
         }

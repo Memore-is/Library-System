@@ -1,16 +1,9 @@
 package libraryproject;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+// ui for the pop-up window
+
+import javax.swing.*;       // the asterisk is to import all classes instead of individually typing stuff out
+import java.awt.*;
 import java.util.ArrayList;
 
 public class BookDialog {

@@ -16,7 +16,7 @@ Slaughterhouse-Five|Kurt Vonnegut|Classics|5
 The Grapes of Wrath|John Steinbeck|Classics|5
 The Lord of the Rings|J.R.R. Tolkein|Fantasy|5
 Harry Potter and the Sorcerer's Stone|J.K. Rowling|Fantasy|5
-The Hobbit|J.R.R. Tolkein|Fantasy|5
+The Hobbit|J.R.R. Tolkein|Fantasy|0
 A Game of Thrones|George R.R. Martin|Fantasy|5
 The Name of the Wind|Patrick Rothfuss|Fantasy|5
 The Lies of Locke Lamora|Scott Lynch|Fantasy|5
@@ -129,5 +129,4 @@ The Genealogy of Morals|Friedrich Nietzsche|Philosophy|5
 The Sceptical Essays|Friedrich Nietzsche|Philosophy|5
 The death of Ivan Ilyich|Leo Tolstoy|Philosophy|5
 The Plague|Albert Camus|Philosophy|5
-The Rebel|Albert Camus|Philosophy|5
-Bowling Alone|Robert Putnam|Non-Fiction|3
+The Rebel|Albert Camus|Philosophy|4

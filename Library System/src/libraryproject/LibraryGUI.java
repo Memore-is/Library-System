@@ -4,7 +4,6 @@ package libraryproject;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class LibraryGUI {
     Manager manager = new Manager();
     JFrame frame;
