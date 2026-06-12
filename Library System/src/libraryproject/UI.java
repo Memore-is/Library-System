@@ -9,8 +9,8 @@ public class UI {
         System.out.println("Welcome to the Library!");
 
         while (true) {
-            System.out.println("\nOptions: \n1. Browse \n2. Borrow or Return Book \n3. Add or Remove Book \n4. Edit Students \n5. Exit");
-            System.out.print("\nPlease enter function number (1-6): ");
+            System.out.println("\nOptions: \n1. Browse \n2. Borrow or Return Book \n3. Add or Remove Book \n4. Students \n5. Exit");
+            System.out.print("\nPlease enter function number (1-5): ");
             int function = input.nextInt();
 
             if (function < 1 || function > 5) {
@@ -29,8 +29,8 @@ public class UI {
                 new Adjust();
             }
             else if (function == 4) {
-                System.out.println("Edit Students");
-                new Edit();
+                System.out.println("Students");
+                new Students();
             }
             else {
                 System.out.println("Have a great day!");

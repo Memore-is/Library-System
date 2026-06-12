@@ -38,9 +38,7 @@ public class BRB {
 
         for (Book book : manager.getBooks()) {
             if (book.getTitle().equalsIgnoreCase(title)) {
-                if (book.checkAvailable()) {
-                    book.setCopies(book.getCopies() - 1);
-                    System.out.println("You have borrowed: " + book.getTitle());
+                    student.borrowBook(book);
                     manager.saveBooks();
                 } else {
                     System.out.println("Book is not available.");

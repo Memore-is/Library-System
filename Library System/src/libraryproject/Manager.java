@@ -53,7 +53,6 @@ public class Manager {
 
     private void loadStudents() {
         File studentFile = new File("students.txt");
-
         try (Scanner scanner = new Scanner(studentFile)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
@@ -62,16 +61,14 @@ public class Manager {
                 }
 
                 String[] parts = line.split("\\|");
-                if (parts.length < 4) {
+                if (parts.length < 2) {
                     continue;
                 }
 
-                String title = parts[0].trim();
-                String author = parts[1].trim();
-                String genre = parts[2].trim();
-                int copies = Integer.parseInt(parts[3].trim());
+                String name = parts[0].trim();
+                int osis = Integer.parseInt(parts[1].trim());
 
-                books.add(new Book(title, author, genre, copies));
+                students.add(new Student(name, osis));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,14 +91,11 @@ public class Manager {
         File file = new File("students.txt");
 
         try (PrintWriter writer = new PrintWriter(file)) {
-            for (Book book : books) {
-                writer.println(book.getTitle() + "|" + book.getAuthor() + "|" + book.getGenre() + "|" + book.getCopies());
+            for (Student student : students) {
+                writer.println(student.getName() + "|" + student.getOsis() +);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
-
-// the manager doesnt need to load these twice does it? i can just load them once in the constructor and then call the getBooks and getStudents methods to access them in the other classes. also, the saveBooks and saveStudents methods should be called whenever we make changes to the books or students lists, not just when we load them.
-// 
