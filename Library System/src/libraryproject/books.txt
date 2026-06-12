@@ -106,7 +106,7 @@ The Book of Five Rings|Miyamoto Musashi|Philosophy|5
 The Analects|Confucius|Philosophy|5
 The Symposium|Plato|Philosophy|5
 The Stranger|Albert Camus|Philosophy|5
-The Myth of Sisyphus|Albert Camus|Philosophy|5
+The Myth of Sisyphus|Albert Camus|Philosophy|4
 The Ethics|Baruch Spinoza|Philosophy|5
 The Social Contract|Jean-Jacques Rousseau|Philosophy|5
 The Leviathan|Thomas Hobbes|Philosophy|5

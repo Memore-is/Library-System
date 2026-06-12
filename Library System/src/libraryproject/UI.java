@@ -1,6 +1,6 @@
 package libraryproject;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class UI {
     public static void main(String[] args) {

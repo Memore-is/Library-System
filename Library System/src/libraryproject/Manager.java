@@ -10,24 +10,19 @@ import java.util.Scanner;
 
 public class Manager {
     private ArrayList<Book> books = new ArrayList<Book>();
+    private ArrayList<Student> students = new ArrayList<Student>();
 
     public ArrayList<Book> getBooks() {
         return books;
     }
 
-    public void loadBooks() {
-        File file = new File("books.txt");
-        
-        if (!file.exists()) {
-            file = new File("Library System/src/libraryproject/books.txt");
-        }
+    public ArrayList<Book> getStudents() {
+        return books;
+    }
 
-        if (!file.exists()) {
-            System.err.println("Could not find books.txt. Checked paths: \n  " +
-                    new File("books.txt").getAbsolutePath() + "\n  " +
-                    file.getAbsolutePath());
-            return;
-        }
+    public void loadArrays() {
+        File bookFile = new File("books.txt");
+        File studentFile = new File("students.txt");
 
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
@@ -67,4 +62,6 @@ public class Manager {
             e.printStackTrace();
         }
     }
+
+
 }

@@ -36,7 +36,7 @@ public class Edit {
         System.out.print("Enter student name: ");
         String name = input.nextLine().trim();
         if (!name.isEmpty()) {
-            students.add(new Student(name));
+            students.add(new Student(name, students.size() + 1));
             System.out.println("Student added.");
         } else {
             System.out.println("Name cannot be empty.");
