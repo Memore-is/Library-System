@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Edit {
-    private ArrayList<Student> students = new ArrayList<>();
+    private Manager manager = new Manager();
     private Scanner input = new Scanner(System.in);
     
     public Edit() {

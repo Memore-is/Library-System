@@ -7,7 +7,7 @@ public class Adjust {
     private Scanner input = new Scanner(System.in);
     
     public Adjust() {
-        manager.loadBooks();
+        manager.loadArrs();
         while (true) {
             System.out.println("Options: \n1. Add Books \n2. Remove Books \n3. Go Back");
             System.out.print("Please enter function number (1-3): ");

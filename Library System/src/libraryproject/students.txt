@@ -19,4 +19,4 @@ Andrew|Thompson|0|0|0
 Elizabeth|Garcia|0|0|0
 Joshua|Martinez|0|0|0
 Megan|Robinson|0|0|0
-Ryan|Clark|0|0|0 
+Ryan|Clark|0|0|0
