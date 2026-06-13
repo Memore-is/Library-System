@@ -3,6 +3,7 @@ package libraryproject;
 import java.util.Scanner;
 
 public class UI {
+    private static Manager manager = new Manager();
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
@@ -17,12 +18,14 @@ public class UI {
                 System.out.println("Invalid choice. Please enter a number between 1 and 5.");
             }
             else if (function == 1) {
-                System.out.println("Browse");
-                new Browse();
+                System.out.println("\nAvailable Books: \n");
+                for (Book book : manager.getBooks()) {
+                    System.out.println(book);
+                }
             }
             else if (function == 2) {
                 System.out.println("Borrow or Return Book");
-                new Return();
+                new BRB();
             }
             else if (function == 3) {
                 System.out.println("Add or Remove Book");

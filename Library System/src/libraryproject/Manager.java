@@ -1,6 +1,6 @@
 package libraryproject;
 
-// loads books from txt file to program
+// loads books from txt file to program and vice versa to save changes
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -12,7 +12,7 @@ public class Manager {
     private ArrayList<Book> books = new ArrayList<Book>();
     private ArrayList<Student> students = new ArrayList<Student>();
 
-    public Manager() {      // constructor
+    public Manager() {
         loadBooks();
         loadStudents();
     }
@@ -25,7 +25,7 @@ public class Manager {
         return students;
     }
 
-    private void loadBooks() {
+    public void loadBooks() {
         File bookFile = new File("books.txt");
         try (Scanner scanner = new Scanner(bookFile)) {
             while (scanner.hasNextLine()) {
@@ -51,7 +51,7 @@ public class Manager {
         }
     }
 
-    private void loadStudents() {
+    public void loadStudents() {
         File studentFile = new File("students.txt");
         try (Scanner scanner = new Scanner(studentFile)) {
             while (scanner.hasNextLine()) {
@@ -61,14 +61,19 @@ public class Manager {
                 }
 
                 String[] parts = line.split("\\|");
-                if (parts.length < 2) {
+                if (parts.length < 4) {
                     continue;
                 }
 
-                String name = parts[0].trim();
-                int osis = Integer.parseInt(parts[1].trim());
+                String Fname = parts[0].trim();
+                String Lname = parts[1].trim();
+                int osis = Integer.parseInt(parts[2].trim());
+                
+                String borrowed = parts[3].trim();
+                String borrowedBooks[] = borrowed.split("|");
 
-                students.add(new Student(name, osis));
+
+                students.add(new Student(Fname + " " + Lname, osis));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,7 +97,7 @@ public class Manager {
 
         try (PrintWriter writer = new PrintWriter(file)) {
             for (Student student : students) {
-                writer.println(student.getName() + "|" + student.getOsis() +);
+                writer.println(student.getName() + "|" + student.getOsis());
             }
         } catch (Exception e) {
             e.printStackTrace();

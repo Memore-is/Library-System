@@ -40,7 +40,7 @@ public class Students {
         System.out.print("Enter student name: ");
         String name = input.nextLine().trim();
         if (!name.isEmpty()) {
-            students.add(new Student(name, students.size() + 1));
+            manager.getStudents().add(new Student(name, manager.getStudents().size() + 1));
             System.out.println("Student added.");
         } else {
             System.out.println("Name cannot be empty.");
@@ -50,9 +50,9 @@ public class Students {
     private void removeStudent() {
         System.out.print("Enter student name to remove: ");
         String name = input.nextLine().trim();
-        for (Student student : students) {
+        for (Student student : manager.getStudents()) {
             if (student.getName().equalsIgnoreCase(name)) {
-                students.remove(student);
+                manager.getStudents().remove(student);
                 System.out.println("Student removed.");
                 return;
             }
@@ -63,7 +63,7 @@ public class Students {
     private void showStudentInfo() {
         System.out.print("Enter OSIS: ");
         String osis = input.nextLine().trim();
-        for (Student student : students) {
+        for (Student student : manager.getStudents()) {
             if (student.getOsis() == Integer.parseInt(osis)) {
                 student.showInfo();
                 return;
