@@ -19,6 +19,7 @@ public class UI {
             }
             else if (function == 1) {
                 System.out.println("\nAvailable Books: \n");
+                
                 for (Book book : manager.getBooks()) {
                     System.out.println(book);
                 }

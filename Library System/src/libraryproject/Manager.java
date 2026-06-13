@@ -27,6 +27,15 @@ public class Manager {
 
     public void loadBooks() {
         File bookFile = new File("books.txt");
+        if (!bookFile.exists()) {
+            File alt = new File("src/libraryproject/books.txt");
+            if (alt.exists()) bookFile = alt;
+            else {
+                File altRoot = new File("Library System/books.txt");
+                if (altRoot.exists()) bookFile = altRoot;
+            }
+        }
+
         try (Scanner scanner = new Scanner(bookFile)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
@@ -53,16 +62,19 @@ public class Manager {
 
     public void loadStudents() {
         File studentFile = new File("students.txt");
-        // fallback to src path if file is kept under source tree
         if (!studentFile.exists()) {
             File alt = new File("src/libraryproject/students.txt");
             if (alt.exists()) studentFile = alt;
             else {
-                // create an empty students.txt in working dir so future runs won't fail
-                try {
-                    studentFile.createNewFile();
-                } catch (Exception ex) {
-                    // ignore creation failure; scanner below will throw if missing
+                File altRoot = new File("Library System/students.txt");
+                if (altRoot.exists()) studentFile = altRoot;
+                else {
+                    // create an empty students.txt in working dir so future runs won't fail
+                    try {
+                        studentFile.createNewFile();
+                    } catch (Exception ex) {
+                        // ignore creation failure; scanner below will throw if missing
+                    }
                 }
             }
         }
