@@ -3,10 +3,12 @@ package libraryproject;
 import java.util.Scanner;
 
 public class Adjust {
-    private Manager manager = new Manager();
-    private Scanner input = new Scanner(System.in);
-    
-    public Adjust() {
+    private Manager manager;
+    private Scanner input;
+
+    public Adjust(Manager manager, Scanner input) {
+        this.manager = manager;
+        this.input = input;
         while (true) {
             System.out.println("Options: \n1. Add Books \n2. Remove Books \n3. Go Back");
             System.out.print("Please enter function number (1-3): ");

@@ -3,10 +3,12 @@ package libraryproject;
 import java.util.Scanner;
 
 public class BRB {
-    private Manager manager = new Manager();
-    private Scanner input = new Scanner(System.in);
+    private Manager manager;
+    private Scanner input;
 
-    public BRB() {
+    public BRB(Manager manager, Scanner input) {
+        this.manager = manager;
+        this.input = input;
         // Manager constructor already loads books and students
         while (true) {
             System.out.println("Options: \n1. Borrow Books \n2. Return Books \n3. Go Back");

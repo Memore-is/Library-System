@@ -1,13 +1,14 @@
 package libraryproject;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Students {
-    private Manager manager = new Manager();
-    private Scanner input = new Scanner(System.in);
-    
-    public Students() {
+    private Manager manager;
+    private Scanner input;
+
+    public Students(Manager manager, Scanner input) {
+        this.manager = manager;
+        this.input = input;
         while (true) {
             System.out.println("Options: \n1. Add Student \n2. Remove Student \n3. Show Student Info \n4. Go Back");
             System.out.print("Please enter function number (1-4): ");

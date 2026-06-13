@@ -3,9 +3,9 @@ package libraryproject;
 import java.util.Scanner;
 
 public class UI {
-    private static Manager manager = new Manager();
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        Manager manager = new Manager();
 
         System.out.println("Welcome to the Library!");
 
@@ -25,15 +25,15 @@ public class UI {
             }
             else if (function == 2) {
                 System.out.println("Borrow or Return Book");
-                new BRB();
+                new BRB(manager, input);
             }
             else if (function == 3) {
                 System.out.println("Add or Remove Book");
-                new Adjust();
+                new Adjust(manager, input);
             }
             else if (function == 4) {
                 System.out.println("Students");
-                new Students();
+                new Students(manager, input);
             }
             else {
                 System.out.println("Have a great day!");
