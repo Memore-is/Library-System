@@ -12,7 +12,7 @@ public class Manager {
     private ArrayList<Book> books = new ArrayList<Book>();
     private ArrayList<Student> students = new ArrayList<Student>();
 
-    public Manager() {
+    public Manager() {          // constructor runs on program to start by loading books and students from txt files
         loadBooks();
         loadStudents();
     }
@@ -26,15 +26,9 @@ public class Manager {
     }
 
     public void loadBooks() {
-        File bookFile = new File("books.txt");
-        if (!bookFile.exists()) {
-            File alt = new File("src/libraryproject/books.txt");
-            if (alt.exists()) bookFile = alt;
-            else {
-                File altRoot = new File("Library System/books.txt");
-                if (altRoot.exists()) bookFile = altRoot;
-            }
-        }
+        File bookFile = new File("Library System/src/libraryproject/books.txt");
+
+        
 
         try (Scanner scanner = new Scanner(bookFile)) {
             while (scanner.hasNextLine()) {
