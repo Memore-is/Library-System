@@ -9,7 +9,7 @@ public class BRB {
     public BRB(Manager manager, Scanner input) {
         this.manager = manager;
         this.input = input;
-        // Manager constructor already loads books and students
+
         while (true) {
             System.out.println("Options: \n1. Borrow Books \n2. Return Books \n3. Go Back");
             System.out.print("Please enter function number (1-3): ");

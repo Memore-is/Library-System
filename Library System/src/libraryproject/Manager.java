@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Manager {
-    private ArrayList<Book> books = new ArrayList<Book>();
-    private ArrayList<Student> students = new ArrayList<Student>();
+    public static ArrayList<Book> books = new ArrayList<Book>();
+    public static ArrayList<Student> students = new ArrayList<Student>();
+    
+    private static File bookFile = new File("Library System/src/libraryproject/books.txt");
+    private static File studentFile = new File("Library System/src/libraryproject/students.txt");
 
     public Manager() {          // constructor runs on program to start by loading books and students from txt files
         loadBooks();
@@ -26,10 +29,6 @@ public class Manager {
     }
 
     public void loadBooks() {
-        File bookFile = new File("Library System/src/libraryproject/books.txt");
-
-        
-
         try (Scanner scanner = new Scanner(bookFile)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
@@ -55,24 +54,6 @@ public class Manager {
     }
 
     public void loadStudents() {
-        File studentFile = new File("students.txt");
-        if (!studentFile.exists()) {
-            File alt = new File("src/libraryproject/students.txt");
-            if (alt.exists()) studentFile = alt;
-            else {
-                File altRoot = new File("Library System/students.txt");
-                if (altRoot.exists()) studentFile = altRoot;
-                else {
-                    // create an empty students.txt in working dir so future runs won't fail
-                    try {
-                        studentFile.createNewFile();
-                    } catch (Exception ex) {
-                        // ignore creation failure; scanner below will throw if missing
-                    }
-                }
-            }
-        }
-
         try (Scanner scanner = new Scanner(studentFile)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
@@ -130,9 +111,7 @@ public class Manager {
     }
 
     public void saveBooks() {
-        File file = new File("books.txt");
-
-        try (PrintWriter writer = new PrintWriter(file)) {
+        try (PrintWriter writer = new PrintWriter(bookFile)) {
             for (Book book : books) {
                 writer.println(book.getTitle() + "|" + book.getAuthor() + "|" + book.getGenre() + "|" + book.getCopies());
             }
@@ -142,9 +121,7 @@ public class Manager {
     }
 
     public void saveStudents() {
-        File file = new File("students.txt");
-
-        try (PrintWriter writer = new PrintWriter(file)) {
+        try (PrintWriter writer = new PrintWriter(studentFile)) {
             for (Student student : students) {
                 writer.println(student.getName() + "|" + student.getOsis());
             }
