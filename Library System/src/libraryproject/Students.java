@@ -38,8 +38,23 @@ public class Students {
     }
 
     private void addStudent() {
-        System.out.print("Enter student name: ");
-        String name = input.nextLine().trim();
+        System.out.print("Enter student first name: ");
+        String fname = input.nextLine().trim();
+
+        System.out.print("Enter student last name: ");
+        String lname = input.nextLine().trim();
+
+        System.out.print("Enter student ID: ");
+        int osis = input.nextInt();
+
+        for (i = 0; i > name.length(); i++) {
+            if (char.At[i] >) {
+
+            }
+        }
+
+        // preconditions: name cannot be a number and must be longer than 1 letter
+
         if (!name.isEmpty()) {
             manager.getStudents().add(new Student(name, manager.getStudents().size() + 1));
             System.out.println("Student added.");

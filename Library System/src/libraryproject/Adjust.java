@@ -9,6 +9,8 @@ public class Adjust {
     public Adjust(Manager manager, Scanner input) {
         this.manager = manager;
         this.input = input;
+
+        // idk eat my brain but change this to buttons in libgui class
         while (true) {
             System.out.println("Options: \n1. Add Books \n2. Remove Books \n3. Go Back");
             System.out.print("Please enter function number (1-3): ");
