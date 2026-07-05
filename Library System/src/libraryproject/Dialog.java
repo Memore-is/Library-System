@@ -6,7 +6,7 @@ import javax.swing.*;       // the asterisk is to import all classes instead of 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class BookDialog {
+public class Dialog {
     public static void showAddBookDialog(JFrame frame, Manager manager, JTextArea Allbooks) {
         // JDialog = a window that "blocks" the main window (you must close it first)
         // "Add Book" = dialog title

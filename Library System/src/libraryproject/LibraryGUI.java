@@ -71,8 +71,7 @@ public class LibraryGUI {
             for (Book b : manager.getBooks()) {
                 if (b.getTitle().equalsIgnoreCase(title)) {
                     if (b.checkAvailable()) {
-                        //student.borrowBook(b);  --> figure out if this works
-                        b.setCopies(b.getCopies() - 1);
+                        student.borrowBook(b);
                         manager.saveBooks();
                         JOptionPane.showMessageDialog(frame, "Borrow successful.");
                         refreshAllBooks();
@@ -112,20 +111,27 @@ public class LibraryGUI {
 
             for (Book b : manager.getBooks()) {
                 if (b.getTitle().equalsIgnoreCase(title)) {
-                    // student.returnBook(b);  --> figure out if this works
-                    b.setCopies(b.getCopies() + 1);
+                    student.returnBook(b);
                     manager.saveBooks();
-
                     JOptionPane.showMessageDialog(frame, "Book returned.");
                     refreshAllBooks();
-
                     return;
                 }
             }
             JOptionPane.showMessageDialog(frame, "Book not found.");
         });
 
-        add.addActionListener(e -> showAddBookDialog());
+        add.addActionListener(e -> 
+            Dialog.showAddBookDialog(frame, manager, Allbooks)
+        );
+
+        remove.addActionListener(e -> 
+            Dialog.showRemoveBookDialog(frame, "Remove Book", manager, Allbooks)
+        );
+
+        students.addActionListener(e-> 
+            Dialog.showStudentDialog(frame, manager)
+        );
 
         frame.setSize(500, 400);        // in pixels for sm reason
         frame.setLocationRelativeTo(null);          // center?
@@ -133,10 +139,6 @@ public class LibraryGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setVisible(true);     // make visible
-    }
-
-    private void showAddBookDialog() {
-        BookDialog.showAddBookDialog(frame, manager, Allbooks);
     }
 
     private void refreshAllBooks() {
