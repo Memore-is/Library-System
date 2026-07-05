@@ -14,10 +14,12 @@ public class LibraryGUI {
 
         frame = new JFrame("Library System");   // main window + title
         
-        JButton browse = new JButton("Browse Books");    
-        JButton borrow = new JButton("Borrow Book");
-        JButton returnB = new JButton("Return Book");
-        JButton add = new JButton("Add Book"); 
+        JButton browse = new JButton("Browse");  
+        JButton borrow = new JButton("Borrow");
+        JButton returnB = new JButton("Return");
+        JButton add = new JButton("Add");
+        JButton remove = new JButton("Remove");
+        JButton students = new JButton("Students");
 
         Allbooks = new JTextArea(20, 40);         // rows show how many objects to display at once, columns for width
         Allbooks.setEditable(false);        // uneditable books
@@ -27,24 +29,48 @@ public class LibraryGUI {
         frame.add(borrow);
         frame.add(returnB);
         frame.add(add);
+        frame.add(remove);
+        frame.add(students);
 
+        // browse button functions (completed)
         frame.add(new JScrollPane(Allbooks));
-
         browse.addActionListener(e -> {
             String text = "";
 
-                for (Book b : manager.getBooks()) {
+            for (Book b : manager.getBooks()) {
                 text += b.toString() + "\n";
             }
-
             Allbooks.setText(text);
         });
 
         borrow.addActionListener(e -> {
-            String title = JOptionPane.showInputDialog(frame, "Enter book title:");
-            for (Book b : manager.getBooks()) {
+            int osis;
+            String osisStr = JOptionPane.showInputDialog(frame, "Enter OSIS: ");
+            try {
+                osis = Integer.parseInt(osisStr);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(frame, "Invalid OSIS.");
+                return;
+            }
 
-                        if (b.getTitle().equalsIgnoreCase(title)) {
+            Student student = null;
+            for (Student s : manager.getStudents()) {
+                if (s.getOsis() == osis) {
+                    student = s;
+                    break;
+                }
+            }
+
+            if (student == null) {
+                System.out.println("Student not found.");
+                return;
+            }
+
+            String title = JOptionPane.showInputDialog(frame, "Enter book title:");
+            
+
+            for (Book b : manager.getBooks()) {
+                if (b.getTitle().equalsIgnoreCase(title)) {
                     if (b.checkAvailable()) {
                         b.setCopies(b.getCopies() - 1);
                         manager.saveBooks();
