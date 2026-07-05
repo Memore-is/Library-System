@@ -62,20 +62,19 @@ public class LibraryGUI {
             }
 
             if (student == null) {
-                System.out.println("Student not found.");
+                JOptionPane.showMessageDialog(frame, "Student not found.");
                 return;
             }
 
             String title = JOptionPane.showInputDialog(frame, "Enter book title:");
             
-
             for (Book b : manager.getBooks()) {
                 if (b.getTitle().equalsIgnoreCase(title)) {
                     if (b.checkAvailable()) {
+                        //student.borrowBook(b);  --> figure out if this works
                         b.setCopies(b.getCopies() - 1);
                         manager.saveBooks();
-
-                        JOptionPane.showMessageDialog(frame, "You borrowed " + b.getTitle());
+                        JOptionPane.showMessageDialog(frame, "Borrow successful.");
                         refreshAllBooks();
                     } else {
                         JOptionPane.showMessageDialog(frame, "Book unavailable.");
@@ -83,15 +82,37 @@ public class LibraryGUI {
                     return;
                 }
             }
-
             JOptionPane.showMessageDialog(frame, "Book not found.");
         });
 
         returnB.addActionListener(e -> {
+            int osis;
+            String osisStr = JOptionPane.showInputDialog(frame, "Enter OSIS: ");
+            try {
+                osis = Integer.parseInt(osisStr);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(frame, "Invalid OSIS.");
+                return;
+            }
+
+            Student student = null;
+            for (Student s : manager.getStudents()) {
+                if (s.getOsis() == osis) {
+                    student = s;
+                    break;
+                }
+            }
+
+            if (student == null) {
+                JOptionPane.showMessageDialog(frame, "Student not found.");
+                return;
+            }
+
             String title = JOptionPane.showInputDialog(frame, "Enter book title:");
 
             for (Book b : manager.getBooks()) {
                 if (b.getTitle().equalsIgnoreCase(title)) {
+                    // student.returnBook(b);  --> figure out if this works
                     b.setCopies(b.getCopies() + 1);
                     manager.saveBooks();
 
@@ -103,7 +124,6 @@ public class LibraryGUI {
             }
             JOptionPane.showMessageDialog(frame, "Book not found.");
         });
-
 
         add.addActionListener(e -> showAddBookDialog());
 
