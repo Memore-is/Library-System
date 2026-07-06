@@ -7,14 +7,20 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Dialog {
+    private static JButton ok = new JButton( "OK");
+    private static JButton cancel = new JButton("Cancel");
+    private static JPanel buttonPanel = new JPanel();
+
     public static void showAddBookDialog(JFrame frame, Manager manager, JTextArea Allbooks) {
         JDialog dialog = new JDialog(frame, "Add Book", true);      // JDialog = a window that "blocks" the main window; true = modal (user must respond to this first)
         
-        dialog.setLayout(new GridBagLayout());
+        dimensions(dialog);
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);    // padding
+        JTextField totalField = new JTextField (20);
+        gbc.gridx = 0; gbc.dridy =0; dialog.add(new JLabel("Total number of unique books: "), gbc);
+        gbc.gridx = 1; dialog.add(totalField, gbc);
 
+        // for (int i = 0; i < addnum; i++) repeat
         // input
         JTextField titleField = new JTextField(20);    // 20 chars (width)
         JTextField authorField = new JTextField(20);
@@ -33,9 +39,8 @@ public class Dialog {
         gbc.gridx = 0; gbc.gridy = 3; dialog.add(new JLabel("Copies:"), gbc);
         gbc.gridx = 1; dialog.add(copiesField, gbc);
 
-        JPanel buttonPanel = new JPanel();
-        JButton ok = new JButton("OK");
-        JButton cancel = new JButton("Cancel");
+        
+        
         buttonPanel.add(ok);
         buttonPanel.add(cancel);
 
@@ -59,7 +64,6 @@ public class Dialog {
                 manager.saveBooks();
                 JOptionPane.showMessageDialog(frame, "Book added.");
                 
-                refreshAll(manager.getBooks(), Allbooks);
                 dialog.dispose();
 
             } catch (NumberFormatException ex) {
@@ -74,11 +78,34 @@ public class Dialog {
         dialog.setVisible(true);
     }
 
-    private static void refreshAll(ArrayList<Book> books, JTextArea Allbooks) {
-        String text = "";
-        for (Book b : books) {
-            text += b.toString() + "\n";
-        }
-        Allbooks.setText(text);
+    public static void showRemoveBookDialog(JFrame frame, String title, Manager manager, JTextArea Allbooks) {
+        JDialog dialog = new JDialog(frame, "Remove Book", true);
+
+        dimensions(dialog);
+    
+            System.out.print("Enter title: ");
+            String title = input.nextLine().trim();
+    
+            for (Book book : manager.getBooks()) {
+                if (book.getTitle().equalsIgnoreCase(title)) {
+                    manager.getBooks().remove(book);
+                    System.out.println("Book removed successfully.");
+                    manager.saveBooks();
+                    return;
+                }
+            }
+            System.out.println("Book not found.");
+    }
+
+    public static void showStudentDialog(JFrame frame, String title, Manager manager, JTextArea Allbooks) {
+        JDialog dialog = new JDialog(frame, "Students", true);
+
+        dimensions(dialog);
+    }
+
+    private static void dimensions(JDialog dialog) {
+        dialog.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // padding
     }
 }

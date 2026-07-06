@@ -130,14 +130,12 @@ public class LibraryGUI {
         );
 
         students.addActionListener(e-> 
-            Dialog.showStudentDialog(frame, manager)
+            Dialog.showStudentDialog(frame, "students", manager, Allbooks)
         );
 
         frame.setSize(500, 400);        // in pixels for sm reason
         frame.setLocationRelativeTo(null);          // center?
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         frame.setVisible(true);     // make visible
     }
 

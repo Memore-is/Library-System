@@ -25,27 +25,10 @@ public class Student {
         return borrowed;
     }
 
-    public void showInfo() {
-        System.out.println("Name: " + name);
-        System.out.println("ID: " + osis);
-        System.out.println("Borrowed Books:");
-        if (borrowed.isEmpty()) {
-            System.out.println("None");
-        } else {
-            for (Book book : borrowed) {
-                System.out.println("|" + book.getTitle());
-            }
-        }
-    }
-
     public void borrowBook(Book book) { 
         if (book.checkAvailable()) {
             borrowed.add(book);
             book.setCopies(book.getCopies() - 1);
-            System.out.println("You have borrowed: " + book.getTitle());
-        }
-        else {
-            System.out.println("Book is not available.");
         }
     }
 
@@ -53,10 +36,6 @@ public class Student {
         if (borrowed.contains(book)) {
             borrowed.remove(book);
             book.setCopies(book.getCopies() + 1);
-            System.out.println("You have returned: " + book.getTitle());
-        }
-        else {
-            System.out.println("Book was not borrowed.");
         }
     }
 }
