@@ -122,7 +122,7 @@ public class LibraryGUI {
         });
 
         add.addActionListener(e -> 
-            Dialog.showAddBookDialog(frame, manager, Allbooks)
+            Dialog.showAddBookDialog(frame, manager, Allbooks)  // different class (too long)
         );
 
         remove.addActionListener(e -> 
