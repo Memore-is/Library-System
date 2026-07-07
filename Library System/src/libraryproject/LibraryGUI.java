@@ -121,16 +121,20 @@ public class LibraryGUI {
             JOptionPane.showMessageDialog(frame, "Book not found.");
         });
 
-        add.addActionListener(e -> 
-            Dialog.showAddBookDialog(frame, manager, Allbooks)  // different class (too long)
-        );
+        add.addActionListener(e -> {
+            String total = JOptionPane.showInputDialog(frame, "Enter total unique books:");
+            for (int i = 0; i < Integer.parseInt(total); i++) {
+                new Dialog(frame, manager, Allbooks, "Add Book");
+            }
+        });
 
-        remove.addActionListener(e -> 
-            Dialog.showRemoveBookDialog(frame, "Remove Book", manager, Allbooks)
+        remove.addActionListener(e ->
+
+            new Dialog(frame, manager, Allbooks, "Remove Book")
         );
 
         students.addActionListener(e-> 
-            Dialog.showStudentDialog(frame, "students", manager, Allbooks)
+            new StudentDialog(frame, manager, Allbooks)
         );
 
         frame.setSize(500, 400);        // in pixels for sm reason

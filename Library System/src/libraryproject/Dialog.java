@@ -11,17 +11,16 @@ public class Dialog {
     private static JButton cancel = new JButton("Cancel");
     private static JPanel buttonPanel = new JPanel();
 
-    public static void showAddBookDialog(JFrame frame, Manager manager, JTextArea Allbooks) {
-        JDialog dialog = new JDialog(frame, "Add Book", true);      // JDialog = a window that "blocks" the main window; true = modal (user must respond to this first)
-        
-        dimensions(dialog);
+    public Dialog(JFrame frame, Manager manager, JTextArea Allbooks, String title) {
+        JDialog dialog = new JDialog(frame, title, true);      // JDialog = a window that "blocks" the main window; true = modal (user must respond to this first)
 
-        JTextField totalField = new JTextField (20);
-        gbc.gridx = 0; gbc.dridy =0; dialog.add(new JLabel("Total number of unique books: "), gbc);
-        gbc.gridx = 1; dialog.add(totalField, gbc);
+        dialog.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // padding
 
-        // for (int i = 0; i < addnum; i++) repeat
-        // input
+        buttonPanel.add(ok);
+        buttonPanel.add(cancel);
+
         JTextField titleField = new JTextField(20);    // 20 chars (width)
         JTextField authorField = new JTextField(20);
         JTextField genreField = new JTextField(20);
@@ -38,11 +37,6 @@ public class Dialog {
 
         gbc.gridx = 0; gbc.gridy = 3; dialog.add(new JLabel("Copies:"), gbc);
         gbc.gridx = 1; dialog.add(copiesField, gbc);
-
-        
-        
-        buttonPanel.add(ok);
-        buttonPanel.add(cancel);
 
         // Row 4: buttons span both columns (gridwidth = 2)
         gbc.gridx = 0; gbc.gridy = 4; gbc.gridwidth = 2; dialog.add(buttonPanel, gbc);
@@ -76,36 +70,5 @@ public class Dialog {
         dialog.pack();  // autosize the dialog size based on its contents
         dialog.setLocationRelativeTo(frame);  // center on parent frame
         dialog.setVisible(true);
-    }
-
-    public static void showRemoveBookDialog(JFrame frame, String title, Manager manager, JTextArea Allbooks) {
-        JDialog dialog = new JDialog(frame, "Remove Book", true);
-
-        dimensions(dialog);
-    
-            System.out.print("Enter title: ");
-            String title = input.nextLine().trim();
-    
-            for (Book book : manager.getBooks()) {
-                if (book.getTitle().equalsIgnoreCase(title)) {
-                    manager.getBooks().remove(book);
-                    System.out.println("Book removed successfully.");
-                    manager.saveBooks();
-                    return;
-                }
-            }
-            System.out.println("Book not found.");
-    }
-
-    public static void showStudentDialog(JFrame frame, String title, Manager manager, JTextArea Allbooks) {
-        JDialog dialog = new JDialog(frame, "Students", true);
-
-        dimensions(dialog);
-    }
-
-    private static void dimensions(JDialog dialog) {
-        dialog.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); // padding
     }
 }
