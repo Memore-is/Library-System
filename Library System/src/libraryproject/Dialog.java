@@ -49,14 +49,13 @@ public class Dialog {
                 int copies = Integer.parseInt(copiesField.getText().trim());
 
                 if (title.isEmpty() || author.isEmpty() || genre.isEmpty()) {
-                    JOptionPane.showMessageDialog(dialog, 
-                        "Fields cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(dialog, "Fields cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;  // rerun action listener
                 }
 
                 manager.getBooks().add(new Book(title, author, genre, copies));
                 manager.saveBooks();
-                JOptionPane.showMessageDialog(frame, "Book added.");
+                JOptionPane.showMessageDialog(frame, "Book added.", "Success", JOptionPane.INFORMATION_MESSAGE);
                 
                 dialog.dispose();
 
