@@ -1,10 +1,7 @@
 package libraryproject;
 
-// ui for the pop-up window
-
-import javax.swing.*;       // the asterisk is to import all classes instead of individually typing stuff out
+import javax.swing.*; 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Dialog {
     private static JButton ok = new JButton( "OK");

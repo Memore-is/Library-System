@@ -9,6 +9,10 @@ public class LibraryGUI {
     JFrame frame;
     JTextArea Allbooks;
 
+    public static void main(String[] args) {
+        new LibraryGUI();
+    }
+
     public LibraryGUI() {
         manager.loadBooks();
 
@@ -21,27 +25,20 @@ public class LibraryGUI {
         JButton remove = new JButton("Remove");
         JButton students = new JButton("Students");
 
-        Allbooks = new JTextArea(20, 40);         // rows show how many objects to display at once, columns for width
+        Allbooks = new JTextArea(40, 120);         // rows show how many objects to display at once, columns for width
+        Allbooks.setFont(new Font("Times New Roman", Font.PLAIN, 16));
         Allbooks.setEditable(false);        // uneditable books
         frame.setLayout(new FlowLayout());      // to arrange in row
-
+        
         frame.add(browse);
         frame.add(borrow);
         frame.add(returnB);
         frame.add(add);
         frame.add(remove);
         frame.add(students);
-
-        // browse button functions (completed)
         frame.add(new JScrollPane(Allbooks));
-        browse.addActionListener(e -> {
-            String text = "";
-
-            for (Book b : manager.getBooks()) {
-                text += b.toString() + "\n";
-            }
-            Allbooks.setText(text);
-        });
+        
+        browse.addActionListener(e -> reload()); // not working bec
 
         borrow.addActionListener(e -> {
             int osis;
@@ -74,7 +71,7 @@ public class LibraryGUI {
                         student.borrowBook(b);
                         manager.saveBooks();
                         JOptionPane.showMessageDialog(frame, "Borrow successful.");
-                        refreshAllBooks();
+                        reload();
                     } else {
                         JOptionPane.showMessageDialog(frame, "Book unavailable.");
                     }
@@ -114,7 +111,7 @@ public class LibraryGUI {
                     student.returnBook(b);
                     manager.saveBooks();
                     JOptionPane.showMessageDialog(frame, "Book returned.");
-                    refreshAllBooks();
+                    reload();
                     return;
                 }
             }
@@ -137,13 +134,12 @@ public class LibraryGUI {
             new StudentDialog(frame, manager, Allbooks)
         );
 
-        frame.setSize(500, 400);        // in pixels for sm reason
-        frame.setLocationRelativeTo(null);          // center?
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // mwuahaha fullscreen now
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);     // make visible
     }
 
-    private void refreshAllBooks() {
+    private void reload() {
         String text = "";
         for (Book b : manager.getBooks()) {
             text += b.toString() + "\n";

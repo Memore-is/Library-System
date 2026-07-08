@@ -1,8 +1,9 @@
 package libraryproject;
 
-import javax.swing.*;
+import javax.swing.*; 
+import java.awt.*;
 
-public class StudentDialog extends JDialog {
+public class StudentDialog {
     private static JButton add = new JButton( "Add");
     private static JButton remove = new JButton("Remove");
     private static JButton showInfo = new JButton("Show Information");
@@ -10,8 +11,9 @@ public class StudentDialog extends JDialog {
     private static JPanel buttonPanel = new JPanel();
 
     public StudentDialog(JFrame frame, Manager manager, JTextArea Allbooks) {
-        super(frame, "Student Information", true);
-
+        JDialog dialog = new JDialog(frame, "Student Information", true);
+        
+        // fix this 
         buttonPanel.add(add);
         buttonPanel.add(remove);
         buttonPanel.add(showInfo);
