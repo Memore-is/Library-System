@@ -3,18 +3,27 @@ package libraryproject;
 import java.util.ArrayList; 
 
 public class Student {
-    private String name;
+    private String Fname, Lname;
     private int osis;
     private ArrayList<Book> borrowed;
 
-    public Student(String name, int osis) {
-        this.name = name;
+    public Student(String Fname, String Lname, int osis) {
+        this.Fname = Fname;
+        this.Lname = Lname;
         this.osis = osis;
         borrowed = new ArrayList<Book>();
     }
 
+    public String getFname() {
+        return Fname;
+    }
+
+    public String getLname() {
+        return Lname;
+    }
+
     public String getName() {
-        return name;
+        return Fname + " " + Lname;
     }
 
     public int getOsis() {
