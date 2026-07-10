@@ -57,7 +57,7 @@ public class LibraryGUI {
         Allbooks.setText(text);
     }
 
-    private void borrowed() {
+    private void borrowed() { // done
         Allbooks.setText("");
         for (Student student : manager.getStudents()) {
             if (!student.getBorrowed().isEmpty()) {
@@ -71,20 +71,12 @@ public class LibraryGUI {
         }
     }
 
-    private void borrow() {
-        Student student = null;
-        int osis = getOsis();
-
-        for (Student s : manager.getStudents()) {
-            if (s.getOsis() == osis) {
-                student = s;
-                break;
-            }
-        }
+    private void borrow() { // done
+        Student student = getStudent();
 
         if (student == null) {
-            Message("Student not found.", "Error");
-            return;
+           Message("Student not found.", "Error");
+           return;
         }
 
         String title = JOptionPane.showInputDialog(frame, "Enter book title:");
@@ -99,22 +91,14 @@ public class LibraryGUI {
                 } else {
                     Message("Book unavailable.", "Error");
                 }
-                return;
+                break;
             }
         }
         Message("Book not found.", "Error");
     }
 
-    private void returnB() {
-        int osis = getOsis();
-
-        Student student = null;
-        for (Student s : manager.getStudents()) {
-            if (s.getOsis() == osis) {
-                student = s;
-                break;
-            }
-        }
+    private void returnB() { // done
+        Student student = getStudent();
 
         if (student == null) {
             JOptionPane.showMessageDialog(frame, "Student not found.");
@@ -137,7 +121,10 @@ public class LibraryGUI {
 
     private void manageBooks() {
         String total = JOptionPane.showInputDialog(frame, "Enter total unique books:");
-        for (int i = 0; i < Integer.parseInt(total); i++) {
+
+        if (total.isEmpty() || stringToInt(total) == -1)
+
+        for (int i = 0; i < stringToInt(total); i++) {
             JDialog dialog = new JDialog(frame, "Add Book", true);      // JDialog = a window that "blocks" the main window; true = modal (user must respond to this first)
     
             dialog.setLayout(new GridBagLayout());
@@ -176,7 +163,7 @@ public class LibraryGUI {
                     String title = titleField.getText().trim();
                     String author = authorField.getText().trim();
                     String genre = genreField.getText().trim();
-                    int copies = Integer.parseInt(copiesField.getText().trim());
+                    int copies = stringToInt(copiesField.getText().trim());
     
                     if (title.isEmpty() || author.isEmpty() || genre.isEmpty()) {
                         Message("Fields cannot be empty.", "Error");
@@ -241,9 +228,9 @@ public class LibraryGUI {
 
             String Fname = FnameField.getText().trim();
             String Lname = LnameField.getText().trim();
-            int osis = Integer.parseInt(osisField.getText().trim());
+            int osis = stringToInt(osisField.getText().trim());
 
-            if (Fname.isEmpty() || Lname.isEmpty() || osis == 0) {
+            if (Fname.isEmpty() || Lname.isEmpty() || osis == -1) {
                 Message("Fields cannot be empty.", "Error");
                 return;
             }
@@ -258,7 +245,12 @@ public class LibraryGUI {
             Message("Student not found.", "Error");
         });
 
-        showInfo.addActionListener(e -> showStudentInfo((getOsis())));
+        showInfo.addActionListener(e -> {
+            Student student = getStudent();
+            if (student != null) {
+                showStudentInfo(student.getOsis());
+            }
+        });
         cancel.addActionListener(e -> dialog.dispose());
     }
 
@@ -282,12 +274,26 @@ public class LibraryGUI {
         JOptionPane.showMessageDialog(frame, msg, title, JOptionPane.INFORMATION_MESSAGE);
     }
 
+    private Student getStudent(){
+        Student student = null;
+        int osis = getOsis();
+
+        for (Student s : manager.getStudents()) {
+            if (s.getOsis() == osis) {
+                student = s;
+                break;
+            }
+        }
+        return student;
+    }
+
     private int getOsis() {
         int osis;
         while (true) {
             String osisStr = JOptionPane.showInputDialog(frame, "Enter OSIS: ");
              if (osisStr == null) {
                 Message("Operation cancelled.", "Cancelled");
+                return -1;
              }
 
             try {
@@ -298,5 +304,19 @@ public class LibraryGUI {
             }
         }
         return osis;
+    }
+
+    private int stringToInt(String str) {
+        if (str.isEmpty()) {
+            Message("Input cannot be empty.", "Error");
+            return -1;
+        }
+
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            Message("Invalid number format: " + str, "Error");
+            return -1;
+        }
     }
 }
