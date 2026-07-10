@@ -15,17 +15,9 @@ public class Manager {
     private static File bookFile = new File("Library System/src/libraryproject/books.txt");
     private static File studentFile = new File("Library System/src/libraryproject/students.txt");
 
-    public Manager() {          // constructor runs on program to start by loading books and students from txt files
+    public Manager() {
         loadBooks();
         loadStudents();
-    }
-
-    public ArrayList<Book> getBooks() {
-        return books;
-    }
-
-    public ArrayList<Student> getStudents() {
-        return students;
     }
 
     public void loadBooks() {
@@ -61,49 +53,33 @@ public class Manager {
                     continue;
                 }
 
-                String[] parts = line.split("\\|", -1); // split on literal '|'
+                String[] parts = line.split("\\|", -1);
 
-                if (parts.length == 2) {
-                    // Format: Name|OSIS
-                    String name = parts[0].trim();
-                    int osis = Integer.parseInt(parts[1].trim());
-                    students.add(new Student(name, osis));
-                } else if (parts.length >= 3) {
-                    // Format: Fname|Lname|OSIS|borrowed (borrowed optional)
-                    String Fname = parts[0].trim();
-                    String Lname = parts[1].trim();
-                    int osis = Integer.parseInt(parts[2].trim());
-                    Student s = new Student(Fname + " " + Lname, osis);
+                String Fname = parts[0].trim();
+                String Lname = parts[1].trim();
+                int osis = Integer.parseInt(parts[2].trim());
+                Student s = new Student(Fname, Lname, osis);                
 
-                    // parse borrowed list if present
-                    if (parts.length >= 4) {
-                        String borrowed = parts[3].trim();
-                        if (!borrowed.isEmpty() && !borrowed.equalsIgnoreCase("null")) {
-                            // handle a few common separators: comma, semicolon, pipe
-                            String cleaned = borrowed;
-                            if (cleaned.startsWith("[") && cleaned.endsWith("]")) {
-                                cleaned = cleaned.substring(1, cleaned.length() - 1);
-                            }
-                            String[] items = cleaned.split("\\s*,\\s*|;|\\|", -1);
-                            for (String it : items) {
-                                String title = it.trim();
-                                if (title.isEmpty()) continue;
-                                // find matching book by title (case-insensitive)
-                                for (Book b : books) {
-                                    if (b.getTitle().equalsIgnoreCase(title)) {
-                                        s.getBorrowed().add(b);
-                                        break;
-                                    }
+                // parse borrowed list if present
+                if (parts.length >= 4) {
+                    String borrowed = parts[3].trim();      // borrowed books are all parts after 3rd "|"
+
+                    if (!(borrowed.isEmpty() || borrowed.equalsIgnoreCase("null"))) {   // handle initial "null"
+
+                        for //implement last to first for looop
+                            String title = it.trim();
+                            if (title.isEmpty()) continue;
+        
+                            for (Book b : books) {
+                                if (b.getTitle().equalsIgnoreCase(title)) {
+                                    s.getBorrowed().add(b);
+                                    break;
                                 }
                             }
                         }
                     }
-
-                    students.add(s);
-                } else {
-                    // Unrecognized format; skip
-                    continue;
                 }
+                students.add(s);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,5 +104,13 @@ public class Manager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public ArrayList<Student> getStudents() {
+        return students;
     }
 }
