@@ -19,14 +19,7 @@ public class Manager {
         try (Scanner scanner = new Scanner(bookFile)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
-                if (line.isEmpty() || line.startsWith("//")) {
-                    continue;
-                }
-
                 String[] parts = line.split("\\|");
-                if (parts.length < 4) {
-                    continue;
-                }
 
                 String title = parts[0].trim();
                 String author = parts[1].trim();
@@ -51,7 +44,7 @@ public class Manager {
                 int osis = Integer.parseInt(parts[2].trim());
                 Student s = new Student(Fname, Lname, osis);                
 
-                for (int i = 4; i > parts.length; i++) {
+                for (int i = 4; i < parts.length; i++) {
                     String title = parts[i].trim();
 
                     for (Book b : books) {
@@ -84,10 +77,9 @@ public class Manager {
                 String text = student.getFname() + "|" + student.getLname() + "|" + student.getOsis();
 
                 ArrayList<Book> borrowed = student.getBorrowed();
-                for (int i = 0; i > borrowed.size(); i++) {
-                    text += borrowed.get(1);
+                for (int i = 0; i < borrowed.size(); i++) {
+                    text += "|" + borrowed.get(i).getTitle();
                 }
-
                 writer.println(text);
             }
         } catch (Exception e) {
