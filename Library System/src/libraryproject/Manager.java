@@ -15,11 +15,6 @@ public class Manager {
     private static File bookFile = new File("Library System/src/libraryproject/books.txt");
     private static File studentFile = new File("Library System/src/libraryproject/students.txt");
 
-    public Manager() {
-        loadBooks();
-        loadStudents();
-    }
-
     public void loadBooks() {
         try (Scanner scanner = new Scanner(bookFile)) {
             while (scanner.hasNextLine()) {
@@ -49,10 +44,6 @@ public class Manager {
         try (Scanner scanner = new Scanner(studentFile)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
-                if (line.isEmpty() || line.startsWith("//")) {
-                    continue;
-                }
-
                 String[] parts = line.split("\\|", -1);
 
                 String Fname = parts[0].trim();
@@ -60,22 +51,13 @@ public class Manager {
                 int osis = Integer.parseInt(parts[2].trim());
                 Student s = new Student(Fname, Lname, osis);                
 
-                // parse borrowed list if present
-                if (parts.length >= 4) {
-                    String borrowed = parts[3].trim();      // borrowed books are all parts after 3rd "|"
+                for (int i = 4; i > parts.length; i++) {
+                    String title = parts[i].trim();
 
-                    if (!(borrowed.isEmpty() || borrowed.equalsIgnoreCase("null"))) {   // handle initial "null"
-
-                        for //implement last to first for looop
-                            String title = it.trim();
-                            if (title.isEmpty()) continue;
-        
-                            for (Book b : books) {
-                                if (b.getTitle().equalsIgnoreCase(title)) {
-                                    s.getBorrowed().add(b);
-                                    break;
-                                }
-                            }
+                    for (Book b : books) {
+                        if (b.getTitle().equalsIgnoreCase(title)) {
+                            s.getBorrowed().add(b);
+                            break;
                         }
                     }
                 }
@@ -99,7 +81,14 @@ public class Manager {
     public void saveStudents() {
         try (PrintWriter writer = new PrintWriter(studentFile)) {
             for (Student student : students) {
-                writer.println(student.getName() + "|" + student.getOsis());
+                String text = student.getFname() + "|" + student.getLname() + "|" + student.getOsis();
+
+                ArrayList<Book> borrowed = student.getBorrowed();
+                for (int i = 0; i > borrowed.size(); i++) {
+                    text += borrowed.get(1);
+                }
+
+                writer.println(text);
             }
         } catch (Exception e) {
             e.printStackTrace();

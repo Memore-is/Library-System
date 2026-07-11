@@ -15,6 +15,8 @@ public class LibraryGUI {
 
     public LibraryGUI() {
         manager.loadBooks();
+        manager.loadStudents();
+        
         frame = new JFrame("Library System");
         
         JButton browse = new JButton("Browse");
