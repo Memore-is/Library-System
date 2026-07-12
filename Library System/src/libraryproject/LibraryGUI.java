@@ -26,20 +26,22 @@ public class LibraryGUI {
         JButton manage = new JButton("Manage Books");
         JButton students = new JButton("Students");
 
-        Allbooks = new JTextArea(40, 120);         // rows show how many objects to display at once, columns for width
+        Allbooks = new JTextArea();         // rows show how many objects to display at once, columns for width
         Allbooks.setFont(new Font("Times New Roman", Font.PLAIN, 16));
         Allbooks.setEditable(false);        // uneditable books
-        frame.setLayout(new FlowLayout());      // to arrange in row
+        frame.setLayout(new BorderLayout());
+        ((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(20, 30, 30, 30));
         
-        frame.add(browse);
-        frame.add(borrowed);
-        frame.add(borrow);
-        frame.add(returnB);
-        frame.add(manage);
-        frame.add(students);
-        
-        frame.add(Box.createHorizontalStrut(20));
-        frame.add(new JScrollPane(Allbooks));
+        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttons.add(browse);
+        buttons.add(borrowed);
+        buttons.add(borrow);
+        buttons.add(returnB);
+        buttons.add(manage);
+        buttons.add(students);
+
+        frame.add(buttons, BorderLayout.NORTH);
+        frame.add(new JScrollPane(Allbooks), BorderLayout.CENTER);
         
         browse.addActionListener(e -> reload());
         borrowed.addActionListener(e -> borrowed());
