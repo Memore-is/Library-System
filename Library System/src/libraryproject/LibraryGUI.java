@@ -16,7 +16,7 @@ public class LibraryGUI {
     public LibraryGUI() {
         manager.loadBooks();
         manager.loadStudents();
-        
+
         frame = new JFrame("Library System");
         
         JButton browse = new JButton("Browse");
@@ -37,6 +37,8 @@ public class LibraryGUI {
         frame.add(returnB);
         frame.add(manage);
         frame.add(students);
+        
+        frame.add(Box.createHorizontalStrut(20));
         frame.add(new JScrollPane(Allbooks));
         
         browse.addActionListener(e -> reload());
@@ -88,6 +90,7 @@ public class LibraryGUI {
                 if (b.checkAvailable()) {
                     student.borrowBook(b);
                     manager.saveBooks();
+                    manager.saveStudents();
                     Message("Borrow successful.", "Success");
                     reload();
                 } else {
@@ -113,9 +116,10 @@ public class LibraryGUI {
             if (b.getTitle().equalsIgnoreCase(title)) {
                 student.returnBook(b);
                 manager.saveBooks();
+                manager.saveStudents();
                 JOptionPane.showMessageDialog(frame, "Book returned.");
                 reload();
-                return;
+                break;
             }
         }
         JOptionPane.showMessageDialog(frame, "Book not found.");
@@ -197,15 +201,14 @@ public class LibraryGUI {
         JButton add = new JButton( "Add");
         JButton remove = new JButton("Remove");
         JButton showInfo = new JButton("Show Information");
-        JButton cancel = new JButton("Cancel");
         
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(add);
         buttonPanel.add(remove);
         buttonPanel.add(showInfo);
-        buttonPanel.add(cancel);
 
         add.addActionListener(e -> {
+            // fix
             JTextField FnameField = new JTextField(20);
             JTextField LnameField = new JTextField(20);
             JTextField osisField = new JTextField(20);
@@ -224,6 +227,7 @@ public class LibraryGUI {
         });
 
         remove.addActionListener(e -> {
+            // fix
             JTextField FnameField = new JTextField(20);
             JTextField LnameField = new JTextField(20);
             JTextField osisField = new JTextField(20);
@@ -253,7 +257,11 @@ public class LibraryGUI {
                 showStudentInfo(student.getOsis());
             }
         });
-        cancel.addActionListener(e -> dialog.dispose());
+
+        dialog.add(buttonPanel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(frame);
+        dialog.setVisible(true);
     }
 
     private void showStudentInfo(int osis) {
