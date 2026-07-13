@@ -5,16 +5,14 @@ A fairly-simple downloadable Library-Management-System app. (My first app tho AR
 Simulates the one at my school 😭
 
 
-Built with Java Swing. Learned some Swing with this project. 
-Not so disappointed in my cs class teaching Java anymore.
-10/10 recommended, will continue.
+Built with Java Swing. Learned a lot of Swing with this project. 
+Not so disappointed in my CS class teaching Java anymore.
+10/10 recommended, will continue. (Completed!)
 
 
-Download the LibrarySystem.jar and books.txt file from the release. Needs at least Java 8 already downloaded to work.
-Please don't try fullscreen.
+Should work on all OS.
+
+## To Run: 
+Download the LibrarySystem.jar and books.txt file from the latest release. Needs at least Java 8 and Java Runtime Environment (JRE) or Java Development Kit (JDK) downloaded to work. Needs to be run from the same folder (preferably create a folder and put both files in it). Navigate to the folder in the terminal and run: java -jar library_system.jar
 
 Demo video: Library-System_demo.mov
-
-
-** AI-Use
-Only used for LibraryGUI, BookDialog, and Manager classes  because I didn't know anthing about swing. Approximately ~1 - 2 hrs. Although I went over LibraryGUI and BookDialog, Manager remains vibe coded. I will fix this later as this is also a school project (no AI allowed). No forms of AI in any work before 11/05/26.

@@ -27,10 +27,10 @@ public class LibraryGUI {
         JButton students = new JButton("Students");
 
         Allbooks = new JTextArea();         // rows show how many objects to display at once, columns for width
-        Allbooks.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        Allbooks.setFont(new Font("Times New Roman", Font.PLAIN, 18));
         Allbooks.setEditable(false);        // uneditable books
         frame.setLayout(new BorderLayout());
-        ((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(20, 30, 30, 30));
+        ((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(20, 40, 40, 40));
         
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttons.add(browse);
