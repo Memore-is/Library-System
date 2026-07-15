@@ -98,7 +98,7 @@ public class LibraryGUI {
                 } else {
                     Message("Book unavailable.", "Error");
                 }
-                break;
+                return;
             }
         }
         Message("Book not found.", "Error");
@@ -121,7 +121,7 @@ public class LibraryGUI {
                 manager.saveStudents();
                 JOptionPane.showMessageDialog(frame, "Book returned.");
                 reload();
-                break;
+                return;
             }
         }
         JOptionPane.showMessageDialog(frame, "Book not found.");
@@ -130,7 +130,9 @@ public class LibraryGUI {
     private void manageBooks() {
         String total = JOptionPane.showInputDialog(frame, "Enter total unique books:");
 
-        if (total.isEmpty() || stringToInt(total) == -1)
+        if (total.isEmpty() || stringToInt(total) == -1) {
+            return;
+        }
 
         for (int i = 0; i < stringToInt(total); i++) {
             JDialog dialog = new JDialog(frame, "Add Book", true);      // JDialog = a window that "blocks" the main window; true = modal (user must respond to this first)
@@ -163,7 +165,6 @@ public class LibraryGUI {
             gbc.gridx = 0; gbc.gridy = 3; dialog.add(new JLabel("Copies:"), gbc);
             gbc.gridx = 1; dialog.add(copiesField, gbc);
     
-            // Row 4: buttons span both columns (gridwidth = 2)
             gbc.gridx = 0; gbc.gridy = 4; gbc.gridwidth = 2; dialog.add(buttonPanel, gbc);
     
             ok.addActionListener(e -> {
@@ -175,7 +176,7 @@ public class LibraryGUI {
     
                     if (title.isEmpty() || author.isEmpty() || genre.isEmpty()) {
                         Message("Fields cannot be empty.", "Error");
-                        return;  // rerun action listener
+                        return;
                     }
     
                     manager.getBooks().add(new Book(title, author, genre, copies));
@@ -198,7 +199,11 @@ public class LibraryGUI {
     }
 
     private void students() {
-        JDialog dialog = new JDialog(frame, "Student Information", true);
+        JDialog dialog = new JDialog(frame, "Students", true);
+
+        dialog.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // padding
     
         JButton add = new JButton( "Add");
         JButton remove = new JButton("Remove");
@@ -215,40 +220,43 @@ public class LibraryGUI {
             JTextField LnameField = new JTextField(20);
             JTextField osisField = new JTextField(20);
 
+            gbc.gridx = 0; gbc.gridy = 0; dialog.add(new JLabel("First Name:"), gbc);
+            gbc.gridx = 1; dialog.add(FnameField, gbc);
+    
+            gbc.gridx = 0; gbc.gridy = 1; dialog.add(new JLabel("Last Name:"), gbc);
+            gbc.gridx = 1; dialog.add(LnameField, gbc);
+    
+            gbc.gridx = 0; gbc.gridy = 2; dialog.add(new JLabel("OSIS:"), gbc);
+            gbc.gridx = 1; dialog.add(osisField, gbc);
+    
+            JButton addS = new JButton( "Add");
+
+            gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 2; dialog.add(addS, gbc);
+
             String Fname = FnameField.getText().trim();
             String Lname = LnameField.getText().trim();
             String osis = osisField.getText().trim();
 
-            if (Fname.isEmpty() || Lname.isEmpty() || osis.isEmpty()) {
-                Message("Fields cannot be empty.", "Error");
-                return;
-            }
-            
-            manager.getStudents().add(new Student(Fname, Lname, manager.getStudents().size() + 1));
-            Message("Student added.", "Success");
+            addS.addActionListener(e -> {
+
+                if (Fname.isEmpty() || Lname.isEmpty() || osis.isEmpty()) {
+                    Message("Fields cannot be empty.", "Error");
+                    return;
+                }
+                
+                manager.getStudents().add(new Student(Fname, Lname, manager.getStudents().size() + 1));
+                manager.saveStudents();
+                Message("Student added.", "Success");
+            )}
         });
 
         remove.addActionListener(e -> {
-            // fix
-            JTextField FnameField = new JTextField(20);
-            JTextField LnameField = new JTextField(20);
-            JTextField osisField = new JTextField(20);
-
-            String Fname = FnameField.getText().trim();
-            String Lname = LnameField.getText().trim();
-            int osis = stringToInt(osisField.getText().trim());
-
-            if (Fname.isEmpty() || Lname.isEmpty() || osis == -1) {
-                Message("Fields cannot be empty.", "Error");
+            Student student = getStudent();
+            if (student != null) {
+                manager.getStudents().remove(student);
+                manager.saveStudents();
+                Message("Student removed.", "Success");
                 return;
-            }
-
-            for (Student student : manager.getStudents()) {
-                if (student.getFname().equalsIgnoreCase(Fname) && student.getLname().equalsIgnoreCase(Lname) && student.getOsis() == osis) {
-                    manager.getStudents().remove(student);
-                    Message("Student removed.", "Success");
-                    return;
-                }
             }
             Message("Student not found.", "Error");
         });
@@ -256,30 +264,26 @@ public class LibraryGUI {
         showInfo.addActionListener(e -> {
             Student student = getStudent();
             if (student != null) {
-                showStudentInfo(student.getOsis());
+                String info = "Student Name: " + student.getFname() + " " + student.getLname() + "\n";
+                info += "OSIS: " + student.getOsis() + "\n";
+                info += "Borrowed Books: \n";
+                if (student.getBorrowed().isEmpty()) {
+                    info += "None";
+                } else {
+                    for (Book book : student.getBorrowed()) {
+                        info += "- " + book.getTitle() + "\n";
+                    }
+                }
+                Message(info, "Student Information");
+                return;
             }
+            Message("Student not found.", "Error");
         });
 
         dialog.add(buttonPanel);
         dialog.pack();
         dialog.setLocationRelativeTo(frame);
         dialog.setVisible(true);
-    }
-
-    private void showStudentInfo(int osis) {
-        for (Student student : manager.getStudents()) {
-            if (student.getOsis() == osis) {
-                String info = "Student Name: " + student.getFname() + " " + student.getLname() + "\n";
-                info += "OSIS: " + student.getOsis() + "\n";
-                info += "Borrowed Books: \n";
-                for (Book book : student.getBorrowed()) {
-                    info += "- " + book.getTitle() + "\n";
-                }
-                Message(info, "Student Information");
-                return;
-            }
-            return;
-        }
     }
 
     private void Message(String msg, String title) {
@@ -290,10 +294,12 @@ public class LibraryGUI {
         Student student = null;
         int osis = getOsis();
 
-        for (Student s : manager.getStudents()) {
-            if (s.getOsis() == osis) {
-                student = s;
-                break;
+        if (osis != -1) {
+            for (Student s : manager.getStudents()) {
+                if (s.getOsis() == osis) {
+                    student = s;
+                    break;
+                }
             }
         }
         return student;
