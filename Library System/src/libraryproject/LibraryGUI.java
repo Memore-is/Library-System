@@ -202,8 +202,6 @@ public class LibraryGUI {
         JDialog dialog = new JDialog(frame, "Students", true);
 
         dialog.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); // padding
     
         JButton add = new JButton( "Add");
         JButton remove = new JButton("Remove");
@@ -215,39 +213,50 @@ public class LibraryGUI {
         buttonPanel.add(showInfo);
 
         add.addActionListener(e -> {
-            // fix
+            JDialog Adialog = new JDialog(frame, "Add", true);
+
+            Adialog.setLayout(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.insets = new Insets(5,5,5,5);
+
             JTextField FnameField = new JTextField(20);
             JTextField LnameField = new JTextField(20);
             JTextField osisField = new JTextField(20);
 
-            gbc.gridx = 0; gbc.gridy = 0; dialog.add(new JLabel("First Name:"), gbc);
-            gbc.gridx = 1; dialog.add(FnameField, gbc);
+            gbc.gridx = 0; gbc.gridy = 0; Adialog.add(new JLabel("First Name:"), gbc);
+            gbc.gridx = 1; Adialog.add(FnameField, gbc);
     
-            gbc.gridx = 0; gbc.gridy = 1; dialog.add(new JLabel("Last Name:"), gbc);
-            gbc.gridx = 1; dialog.add(LnameField, gbc);
+            gbc.gridx = 0; gbc.gridy = 1; Adialog.add(new JLabel("Last Name:"), gbc);
+            gbc.gridx = 1; Adialog.add(LnameField, gbc);
     
-            gbc.gridx = 0; gbc.gridy = 2; dialog.add(new JLabel("OSIS:"), gbc);
-            gbc.gridx = 1; dialog.add(osisField, gbc);
+            gbc.gridx = 0; gbc.gridy = 2; Adialog.add(new JLabel("OSIS:"), gbc);
+            gbc.gridx = 1; Adialog.add(osisField, gbc);
     
             JButton addS = new JButton( "Add");
 
-            gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 2; dialog.add(addS, gbc);
+            gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 2; Adialog.add(addS, gbc);
 
-            String Fname = FnameField.getText().trim();
-            String Lname = LnameField.getText().trim();
-            String osis = osisField.getText().trim();
+            addS.addActionListener(event -> {
 
-            addS.addActionListener(e -> {
+                String Fname = FnameField.getText().trim();
+                String Lname = LnameField.getText().trim();
+                int osis = stringToInt(osisField.getText().trim());
 
-                if (Fname.isEmpty() || Lname.isEmpty() || osis.isEmpty()) {
+                if (Fname.isEmpty() || Lname.isEmpty() || osis == -1) {
                     Message("Fields cannot be empty.", "Error");
                     return;
                 }
                 
-                manager.getStudents().add(new Student(Fname, Lname, manager.getStudents().size() + 1));
+                manager.getStudents().add(new Student(Fname, Lname, osis));
                 manager.saveStudents();
                 Message("Student added.", "Success");
-            )}
+
+                Adialog.dispose();
+            });
+
+            Adialog.pack();
+            Adialog.setLocationRelativeTo(frame);
+            Adialog.setVisible(true);
         });
 
         remove.addActionListener(e -> {
